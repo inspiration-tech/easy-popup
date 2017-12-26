@@ -1,7 +1,10 @@
+// https://github.com/inspiration-tech/simple-popup
+
 function Popup() {
     var defaults = {
             speed: 150,
             styles: true,
+            replaceStyles: false,
             mediaStyles: true,
             templates: true,
             closeOnBackgroundClick: true,
@@ -268,7 +271,10 @@ function Popup() {
 
         var scriptMediaStyles = {};
 
-        scriptStyles = styleHandler.processObj(scriptStyles, this.styles);
+        if (this.replaceStyles)
+            scriptStyles = $.extend(scriptStyles, this.styles);
+        else
+            scriptStyles = styleHandler.processObj(scriptStyles, this.styles);
 
         if (this.mediaStyles !== false) {
             if (typeof this.mediaStyles !== 'object')
@@ -290,7 +296,10 @@ function Popup() {
                     continue;
                 }
 
-                scriptMediaStyles[mediaQuery] = styleHandler.processObj(scriptMediaStyles[mediaQuery], this.mediaStyles[mediaQuery]);
+                if (this.replaceStyles)
+                    scriptMediaStyles[mediaQuery] = $.extend(scriptMediaStyles[mediaQuery], this.mediaStyles[mediaQuery]);
+                else
+                    scriptMediaStyles[mediaQuery] = styleHandler.processObj(scriptMediaStyles[mediaQuery], this.mediaStyles[mediaQuery]);
             }
         }
 
