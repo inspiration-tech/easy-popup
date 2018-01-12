@@ -120,8 +120,7 @@ function Popup() {
     }
 
     $(document).ready(function(){
-        var tint = $('.tint');
-        if (!tint.length)
+        if (!$('.tint').length)
             $('body').append('<div class="tint"></div>');
 
         var html = '';
@@ -137,11 +136,12 @@ function Popup() {
                 continue;
             }
 
+
             if (!$('.tint .popup[data-name="'+name+'"]').length)
                 html += templates[name];
         }
 
-        tint.append(html);
+        $('.tint').append(html);
         $('.popup').hide(); // по умолчанию у попапов display inline-block, поэтому нужно скрыть
     });
 
@@ -310,8 +310,10 @@ function Popup() {
         * Берётся объект scriptStyles, и каждый его селектор с соответствующим объектом CSS-стилей преобразуются в необходимый формат и записываются в созданную таблицу стилей. То же самое делается для каждой строки медиазапроса в объекте scriptMediaStyles.
         * */
 
-        if (!StyleSheet.length)
+        if (!StyleSheet.length) {
             $('head').append('<style title="'+titleHashBase+'"></style>');
+            StyleSheet = $('style[title="'+titleHashBase+'"]');
+        }
 
 
         for (var selector in scriptStyles) {
