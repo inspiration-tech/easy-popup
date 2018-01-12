@@ -193,9 +193,8 @@ function Popup() {
             },
             '.popup .heading': {
                 height: '43px',
-                lineHeight: '45px',
                 background: '#34991b',
-                font: 'bold 30px/40px Arial',
+                font: 'bold 30px/45px Arial',
                 color: '#fff',
                 textAlign: 'center',
                 textTransform: 'uppercase',
