@@ -374,10 +374,12 @@ function Popup() {
                     Popup.close();
                 },
                 closingBtnCallback: false, // если на .closing_button нужно повесить отдельный callback - передать сюда
-                confirmBtnCallback: false, // если на .confirm_button нужно повесить отдельный callback - передать сюда
+                confirmBtnCallback: function(){}, // если на .confirm_button нужно повесить отдельный callback - передать сюда
                 backgroundClickCallback: false, // если при клике на .tint (фон) нужен отдельный callback - передать сюда
                 callbackOnEsc: false, // если при нажатии Esc нужен отдельный callback - передать сюда
-                callbackOnEnter: false // если при нажатии Enter нужен отдельный callback - передать сюда
+                callbackOnEnter: false, // если при нажатии Enter нужен отдельный callback - передать сюда,
+                closingBtnText: false,
+                confirmBtnText: false
             },
             arguments = arguments.length ? arguments[0] : {},
             elem;
@@ -407,11 +409,20 @@ function Popup() {
             elem = $('.tint .popup:first-child');
 
         // вставка контента в попап
-        elem.children('.heading').html(showParams.title);
+        if (showParams.title !== false)
+            elem.children('.heading').html(showParams.title);
         if (showParams.html)
             elem.children('.body').html(showParams.html);
-        else
-            elem.children('.body').find('.text').html(showParams.text);
+        else {
+            if (showParams.text !== false)
+                elem.children('.body').find('.text').html(showParams.text);
+        }
+
+        // текст кнопок
+        if (showParams.closingBtnText)
+            elem.children('.body').find('.closing_button').html(showParams.closingBtnText);
+        if (showParams.confirmBtnText)
+            elem.children('.body').find('.confirm_button').html(showParams.confirmBtnText);
 
         // отображение попапа
         var tint = $('.tint');
