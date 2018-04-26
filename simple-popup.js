@@ -367,12 +367,7 @@ function Popup() {
                 btnEvents: true, // включить/отключить события при клике на кнопки .closing_button и .confirm_button
                 name: 'message', // имя попапа, который вызывается (атрибут data-name)
                 html: false, // применить HTML-шаблон, если он передан (игнорируя title, text и name)
-                closerCallback: function(){
-                    if (Popup.actionState)
-                        return false;
-                    // callback, который происходит при нажатии на .closer
-                    Popup.close();
-                },
+                closerCallback: function(){},
                 closingBtnCallback: false, // если на .closing_button нужно повесить отдельный callback - передать сюда
                 confirmBtnCallback: function(){}, // если на .confirm_button нужно повесить отдельный callback - передать сюда
                 backgroundClickCallback: false, // если при клике на .tint (фон) нужен отдельный callback - передать сюда
@@ -432,24 +427,38 @@ function Popup() {
             elem.show(this.speed);
         }
 
+        var closerCallbackMain = function(){
+            if (typeof showParams.closerCallback !== 'object' || !showParams.closerCallback.hasOwnProperty('closerOff') || showParams.closerCallback.closerOff !== true) {
+                if (Popup.actionState)
+                    return false;
+                // базовый callback, который происходит при нажатии на .closer
+                Popup.close();
+            }
+
+            if (typeof showParams.closerCallback === 'function')
+                showParams.closerCallback();
+            else if (typeof showParams.closerCallback === 'object' && showParams.closerCallback.hasOwnProperty('callback') && typeof showParams.closerCallback.callback === 'function')
+                showParams.closerCallback.callback();
+        };
+
         // событие на клоузер - стереть и повесить новое, конкретно для вызванного попапа
-        elem.children('.closer').off('click').on('click',showParams.closerCallback);
+        elem.children('.closer').off('click').on('click',closerCallbackMain);
         // если события на кнопки не отключены
         if (showParams.btnEvents) {
             var closingBtn = elem.find('.closing_button');
             if (closingBtn.length) {
-                closingBtn.off('click').on('click',showParams.closingBtnCallback ? showParams.closingBtnCallback : showParams.closerCallback);
+                closingBtn.off('click').on('click',showParams.closingBtnCallback ? showParams.closingBtnCallback : closerCallbackMain);
             }
             var confirmBtn = elem.find('.confirm_button');
             if (confirmBtn.length) {
-                confirmBtn.off('click').on('click',showParams.confirmBtnCallback ? showParams.confirmBtnCallback : showParams.closerCallback);
+                confirmBtn.off('click').on('click',showParams.confirmBtnCallback ? showParams.confirmBtnCallback : closerCallbackMain);
             }
         }
         // если включено закрытие попапа по клику на фон
         if (Popup.closeOnBackgroundClick) {
             tint.off('click').on('click', function(){
                 if (!$('.tint .popup:hover').length)
-                    (showParams.backgroundClickCallback ? showParams.backgroundClickCallback : showParams.closerCallback)();
+                    (showParams.backgroundClickCallback ? showParams.backgroundClickCallback : closerCallbackMain)();
             });
         }
 
@@ -469,12 +478,12 @@ function Popup() {
                     var keyCode = e.hasOwnProperty('keyCode') ? e.keyCode : e.which;
 
                     if (Popup.closeOnEsc && keyCode === 27) {
-                        (showParams.callbackOnEsc ? showParams.callbackOnEsc : showParams.closerCallback)();
+                        (showParams.callbackOnEsc ? showParams.callbackOnEsc : closerCallbackMain)();
                         $(document).off('keydown',keyupCallback);
                     }
 
                     if (Popup.confirmOnEnter && keyCode === 13) {
-                        (showParams.callbackOnEnter ? showParams.callbackOnEnter : (showParams.confirmBtnCallback ? showParams.confirmBtnCallback : showParams.closerCallback))();
+                        (showParams.callbackOnEnter ? showParams.callbackOnEnter : (showParams.confirmBtnCallback ? showParams.confirmBtnCallback : closerCallbackMain))();
                         $(document).off('keydown',keyupCallback);
                     }
                 });

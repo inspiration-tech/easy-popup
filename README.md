@@ -115,9 +115,9 @@ var myPopup = new Popup(params);
   
 > Применить HTML-шаблон, если он передан (при этом игнорируются параметры ***title***, ***text*** и ***name***).
 
-  ***closerCallback*** `function`
+  ***closerCallback*** `function | object`
   
-> Callback, который вызывается при нажатии на `.closer`.
+> Callback, который вызывается при нажатии на `.closer`. Если является объектом, то принимается два свойства: `closerOff` (если нужно отключить закрытие попапа - установить в `true`) и `callback` (непосредственно передаваемый callback, который будет вызываться при закрытии)
 
   ***closingBtnCallback*** `function`
   
@@ -141,11 +141,11 @@ var myPopup = new Popup(params);
 
   ***closingBtnText*** `string`
   
-> Задать свой текст для кнопки закрытия (принимает HTML).
+> Задать свой текст для кнопки закрытия `.closing_button` (принимает HTML).
 
   ***confirmBtnText*** `string`
   
-> Задать свой текст для кнопки подтверждения (принимает HTML).
+> Задать свой текст для кнопки подтверждения `.confirm_button` (принимает HTML).
 
 -----------------------------------
 ### close (закрыть попап):
