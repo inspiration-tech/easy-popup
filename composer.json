@@ -1,7 +1,6 @@
 {
-    "name":"components/simple-popup",
+    "name":"simple-popup/simple-popup",
     "description":"Simple js-module for work with popups",
-    "type":"component",
     "version":"1.2",
     "require":{
         "components/jquery": ">=3.2.1"
