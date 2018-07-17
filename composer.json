@@ -3,5 +3,8 @@
     "version":"1.2",
     "require":{
         "components/jquery": ">=3.2.1",
+    },
+    "spm": {
+        "main": "simple-popup.js"
     }
 }
