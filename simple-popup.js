@@ -73,7 +73,7 @@ function Popup() {
     StyleSheet = $('style[title="'+titleHashBase+'"]');
 
     if (params.hasOwnProperty('styleSheetTitle') && params.styleSheetTitle === titleHashBase)
-            specialHashInit = true;
+        specialHashInit = true;
 
     // если это не базовый автовызов - почистить таблицу стилей
     if (!specialHashInit && StyleSheet.length)
@@ -266,6 +266,12 @@ function Popup() {
                 display: 'inline-block',
                 marginLeft: '10px',
                 marginRight: '10px'
+            },
+            'body.h_overflow, html.h_overflow': {
+                overflow: 'hidden !important',
+                height: '100vh',
+                width: '100%',
+                position: 'fixed'
             }
         };
 
@@ -422,6 +428,7 @@ function Popup() {
         // отображение попапа
         var tint = $('.tint');
         tint.show().addClass('active');
+        $('body,html').addClass('h_overflow');
         if (!elem.hasClass('active')) {
             elem.addClass('active');
             elem.show(this.speed);
@@ -511,6 +518,7 @@ function Popup() {
 
         var popup = $('.popup');
         popup.removeClass('active');
+        $('body,html').removeClass('h_overflow');
         popup.hide(this.speed);
 
         this.actionState = true;
@@ -531,7 +539,3 @@ function Popup() {
         return false;
     };
 }
-
-var popup = new Popup({
-    styleSheetTitle: '958c1d72380718e5f4b576299fb5ea0c'
-});
