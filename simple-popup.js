@@ -3,9 +3,9 @@
 function Popup() {
     var defaults = {
             speed: 150,
-            styles: true,
+            styles: false,
             replaceStyles: false,
-            mediaStyles: true,
+            mediaStyles: false,
             templates: true,
             closeOnBackgroundClick: true,
             closeOnEsc: true,
