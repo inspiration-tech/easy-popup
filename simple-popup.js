@@ -1,6 +1,6 @@
 // https://github.com/inspiration-tech/simple-popup
 
-function Popup() {
+window.Popup = function() {
     var defaults = {
             speed: 150,
             styles: false,
