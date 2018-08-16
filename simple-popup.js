@@ -120,7 +120,7 @@ function Popup() {
     }
 
     $(document).ready(function(){
-        if (!$('.tint').length)
+        if (!$('body>.tint').length)
             $('body').append('<div class="tint"></div>');
 
         var html = '';
@@ -130,18 +130,18 @@ function Popup() {
 
             if (templates[name] === false) {
                 delete templates[name];
-                var popupItem = $('.tint .popup[data-name="'+name+'"]');
+                var popupItem = $('body>.tint .popup[data-name="'+name+'"]');
                 if (popupItem.length)
                     popupItem.remove();
                 continue;
             }
 
 
-            if (!$('.tint .popup[data-name="'+name+'"]').length)
+            if (!$('body>.tint .popup[data-name="'+name+'"]').length)
                 html += templates[name];
         }
 
-        $('.tint').append(html);
+        $('body>.tint').append(html);
         $('.popup').hide(); // по умолчанию у попапов display inline-block, поэтому нужно скрыть
     });
 
@@ -157,7 +157,7 @@ function Popup() {
         * */
 
         var scriptStyles = {
-            '.tint': {
+            'body>.tint': {
                 position: 'fixed',
                 display: 'none',
                 width: '100%',
@@ -172,7 +172,7 @@ function Popup() {
                 textAlign: 'center',
                 verticalAlign: 'middle'
             },
-            '.tint::after': {
+            'body>.tint::after': {
                 display: 'inline-block',
                 height: '100%',
                 content: '',
@@ -376,7 +376,7 @@ function Popup() {
                 closerCallback: function(){},
                 closingBtnCallback: false, // если на .closing_button нужно повесить отдельный callback - передать сюда
                 confirmBtnCallback: function(){}, // если на .confirm_button нужно повесить отдельный callback - передать сюда
-                backgroundClickCallback: false, // если при клике на .tint (фон) нужен отдельный callback - передать сюда
+                backgroundClickCallback: false, // если при клике на body>.tint (фон) нужен отдельный callback - передать сюда
                 callbackOnEsc: false, // если при нажатии Esc нужен отдельный callback - передать сюда
                 callbackOnEnter: false, // если при нажатии Enter нужен отдельный callback - передать сюда,
                 closingBtnText: false,
@@ -403,11 +403,11 @@ function Popup() {
             return false;
         }
 
-        elem = $('.tint .popup[data-name="'+showParams.name+'"]');
+        elem = $('body>.tint .popup[data-name="'+showParams.name+'"]');
         if (!elem.length)
-            elem = $('.tint .popup[data-name="'+(showParams.name = 'message')+'"]');
+            elem = $('body>.tint .popup[data-name="'+(showParams.name = 'message')+'"]');
         if (!elem.length)
-            elem = $('.tint .popup:first-child');
+            elem = $('body>.tint .popup:first-child');
 
         // вставка контента в попап
         if (showParams.title !== false)
@@ -426,7 +426,7 @@ function Popup() {
             elem.children('.body').find('.confirm_button').html(showParams.confirmBtnText);
 
         // отображение попапа
-        var tint = $('.tint');
+        var tint = $('body>.tint');
         tint.show().addClass('active');
         $('body,html').addClass('h_overflow');
         if (!elem.hasClass('active')) {
@@ -464,7 +464,7 @@ function Popup() {
         // если включено закрытие попапа по клику на фон
         if (Popup.closeOnBackgroundClick) {
             tint.off('click').on('click', function(){
-                if (!$('.tint .popup:hover').length)
+                if (!$('body>.tint .popup:hover').length)
                     (showParams.backgroundClickCallback ? showParams.backgroundClickCallback : closerCallbackMain)();
             });
         }
@@ -476,7 +476,7 @@ function Popup() {
             // если включено закрытие попапа при нажатии Esc или подтверждение при нажатии Enter // запускать только по таймауту, иначе глюк события - отключается раньше полного появления попапа, при этом метод close блокируется, т.к. открытие попапа ещё не завершилось =)
             if (Popup.closeOnEsc || Popup.confirmOnEnter) {
                 $(document).on('keydown',function keyupCallback(e){
-                    if (!$('.tint.active').length) {
+                    if (!$('body>.tint.active').length) {
                         $(document).off('keydown',keyupCallback);
                         return false;
                     }
@@ -524,7 +524,7 @@ function Popup() {
         this.actionState = true;
         setTimeout(function(){
             //$('html, body').stop(true);
-            $('.tint').hide().removeClass('active');
+            $('body>.tint').hide().removeClass('active');
             // проверяем, задана ли глобальная переменная с jQuery-объектом, на котором до этого был фокус
             if (typeof window.a3e95e180cc04c9d85ffdd8ebecef047 === 'object') {
                 window.a3e95e180cc04c9d85ffdd8ebecef047.focus();
