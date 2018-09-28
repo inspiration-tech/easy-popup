@@ -420,25 +420,21 @@ window.Popup = function() {
         }
 
         // текст кнопок
-        var closingBtnTxt = null;
         if (showParams.closingBtnText !== false)
-            closingBtnTxt = showParams.closingBtnText;
+            elem.children('.body').find('.closing_button').html(showParams.closingBtnText);
         else {
             if (showParams.name === 'confirm')
-                closingBtnTxt = 'Отклонить';
+                elem.children('.body').find('.closing_button').html('Отклонить');
             else if (showParams.name === 'message')
-                closingBtnTxt = 'ОК';
+                elem.children('.body').find('.closing_button').html('ОК');
         }
-        elem.children('.body').find('.closing_button').html(closingBtnTxt);
 
-        var confirmBtnTxt = null;
         if (showParams.confirmBtnText !== false)
-            confirmBtnTxt = showParams.confirmBtnText;
+            elem.children('.body').find('.confirm_button').html(showParams.confirmBtnText);
         else {
             if (showParams.name === 'confirm')
-                confirmBtnTxt = 'Подтвердить';
+                elem.children('.body').find('.confirm_button').html('Подтвердить');
         }
-        elem.children('.body').find('.confirm_button').html(confirmBtnTxt);
 
         // отображение попапа
         var tint = $('body>.tint');
