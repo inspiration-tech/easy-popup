@@ -426,7 +426,7 @@ window.Popup = function() {
         else {
             if (showParams.name === 'confirm')
                 closingBtnTxt = 'Отклонить';
-            else
+            else if (showParams.name === 'message')
                 closingBtnTxt = 'ОК';
         }
         elem.children('.body').find('.closing_button').html(closingBtnTxt);
@@ -434,8 +434,10 @@ window.Popup = function() {
         var confirmBtnTxt = null;
         if (showParams.confirmBtnText !== false)
             confirmBtnTxt = showParams.confirmBtnText;
-        else
-            confirmBtnTxt = 'Подтвердить';
+        else {
+            if (showParams.name === 'confirm')
+                confirmBtnTxt = 'Подтвердить';
+        }
         elem.children('.body').find('.confirm_button').html(confirmBtnTxt);
 
         // отображение попапа
