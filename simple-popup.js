@@ -420,10 +420,23 @@ window.Popup = function() {
         }
 
         // текст кнопок
-        if (showParams.closingBtnText)
-            elem.children('.body').find('.closing_button').html(showParams.closingBtnText);
-        if (showParams.confirmBtnText)
-            elem.children('.body').find('.confirm_button').html(showParams.confirmBtnText);
+        var closingBtnTxt = null;
+        if (showParams.closingBtnText !== false)
+            closingBtnTxt = showParams.closingBtnText;
+        else {
+            if (showParams.name === 'confirm')
+                closingBtnTxt = 'Отклонить';
+            else
+                closingBtnTxt = 'ОК';
+        }
+        elem.children('.body').find('.closing_button').html(closingBtnTxt);
+
+        var confirmBtnTxt = null;
+        if (showParams.confirmBtnText !== false)
+            confirmBtnTxt = showParams.confirmBtnText;
+        else
+            confirmBtnTxt = 'Подтвердить';
+        elem.children('.body').find('.confirm_button').html(confirmBtnTxt);
 
         // отображение попапа
         var tint = $('body>.tint');
@@ -538,4 +551,4 @@ window.Popup = function() {
 
         return false;
     };
-}
+};
