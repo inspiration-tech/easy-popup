@@ -9,7 +9,8 @@ window.Popup = function() {
             templates: true,
             closeOnBackgroundClick: true,
             closeOnEsc: true,
-            confirmOnEnter: true
+            confirmOnEnter: true,
+            scrollTop: null
         },
         Popup = this,
         params = arguments.length ? arguments[0] : {},
@@ -439,7 +440,9 @@ window.Popup = function() {
         // отображение попапа
         var tint = $('body>.tint');
         tint.show().addClass('active');
+        this.scrollTop = $(document).scrollTop();
         $('body,html').addClass('h_overflow');
+        $('body').scrollTop(this.scrollTop);
         if (!elem.hasClass('active')) {
             elem.addClass('active');
             elem.show(this.speed);
@@ -530,6 +533,8 @@ window.Popup = function() {
         var popup = $('.popup');
         popup.removeClass('active');
         $('body,html').removeClass('h_overflow');
+        $('body').scrollTop(0);
+        $(document).scrollTop(this.scrollTop);
         popup.hide(this.speed);
 
         this.actionState = true;
