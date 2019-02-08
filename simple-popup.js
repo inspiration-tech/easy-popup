@@ -69,7 +69,8 @@ window.Popup = function() {
         this[prop] = params.hasOwnProperty(prop) ? params[prop] : defaults[prop];
     }
 
-    this.actionState = false;
+    this.actionState = false; // находится ли попап в процессе открытия/закрытия
+    this.isActive = false; // открыт ли сейчас какой-либо попап
 
     StyleSheet = $('style[title="'+titleHashBase+'"]');
 
@@ -437,10 +438,13 @@ window.Popup = function() {
                 elem.children('.body').find('.confirm_button').html('Подтвердить');
         }
 
+        // ставим scrollTop, но только если это не замена одного попапа другим
+        if (!this.isActive)
+            this.scrollTop = $(document).scrollTop();
         // отображение попапа
         var tint = $('body>.tint');
         tint.show().addClass('active');
-        this.scrollTop = $(document).scrollTop();
+        this.isActive = true;
         $('body,html').addClass('h_overflow');
         $('body').scrollTop(this.scrollTop);
         if (!elem.hasClass('active')) {
@@ -490,7 +494,7 @@ window.Popup = function() {
             // если включено закрытие попапа при нажатии Esc или подтверждение при нажатии Enter // запускать только по таймауту, иначе глюк события - отключается раньше полного появления попапа, при этом метод close блокируется, т.к. открытие попапа ещё не завершилось =)
             if (Popup.closeOnEsc || Popup.confirmOnEnter) {
                 $(document).on('keydown',function keyupCallback(e){
-                    if (!$('body>.tint.active').length) {
+                    if (!Popup.isActive) {
                         $(document).off('keydown',keyupCallback);
                         return false;
                     }
@@ -541,6 +545,7 @@ window.Popup = function() {
         setTimeout(function(){
             //$('html, body').stop(true);
             $('body>.tint').hide().removeClass('active');
+            Popup.isActive = false;
             // проверяем, задана ли глобальная переменная с jQuery-объектом, на котором до этого был фокус
             if (typeof window.a3e95e180cc04c9d85ffdd8ebecef047 === 'object') {
                 window.a3e95e180cc04c9d85ffdd8ebecef047.focus();
