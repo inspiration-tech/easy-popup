@@ -1,58 +1,58 @@
-$(document).ready(function(){
+$(function(){
 
-    // создание локальной переменной myPopup, доступной в данном скрипте внутри $(document).ready()
+    // создание локальной переменной myPopup, доступной в данном скрипте внутри $(function(){});
     // если не нужно передавать параметры в объект попапа, можно его тут не создавать, а использовать базовый объект popup
-    var myPopup = new Popup({
+    var myPopup = new SimplePopup({
         speed: 210,
         closeOnBackgroundClick: false, // не будет закрывать попап при клике на фон
         closeOnEsc: false, // не будет закрывать попап при нажатии Esc
         confirmOnEnter: false, // не будет вызывать callback кнопки подтверждения при нажатии Enter
         templates: {
             confirm: false, // попап-шаблон с именем 'confirm' (data-name="confirm") будет удален из списка по умолчанию
-            additional1: '<div class="popup" data-name="additional1"> \
-                            <div class="closer"> \
+            additional1: '<div class="simple-popup" data-name="additional1"> \
+                            <div class="simple-popup__closer"> \
                                 <div></div> \
                                 <div></div> \
                             </div> \
-                            <div class="heading"></div> \
-                            <div class="body"> \
-                                <div class="text"></div> \
+                            <div class="simple-popup__heading"></div> \
+                            <div class="simple-popup__body"> \
+                                <div class="simple-popup__text"></div> \
                                 <div class="button_wrapper"> \
-                                    <button class="closing_button" id="close_btn">Закрыть</button> \
+                                    <button class="closing_button">Закрыть</button> \
                                 </div> \
                             </div> \
                           </div>',
-            additional2: '<div class="popup" data-name="additional2"> \
-                            <div class="closer"> \
+            additional2: '<div class="simple-popup" data-name="additional2"> \
+                            <div class="simple-popup__closer"> \
                                 <div></div> \
                                 <div></div> \
                             </div> \
-                            <div class="heading"></div> \
-                            <div class="body"> \
-                                <div class="text"></div> \
+                            <div class="simple-popup__heading"></div> \
+                            <div class="simple-popup__body"> \
+                                <div class="simple-popup__text"></div> \
                                 <div>ещё какой-нибудь неизменяемый текст</div> \
                                 <div class="button_wrapper"> \
-                                    <button class="closing_button" id="close_btn">Закрыть</button> \
+                                    <button class="closing_button">Закрыть</button> \
                                 </div> \
                             </div> \
                           </div>'
         },
         styles: {
-            '.tint .popup': {
+            '.simple-popup': {
                 background: '#f00',
                 textAlign: 'center',
                 overflowX: 'hidden',
                 margin: false // удалит свойство margin из дефолтных стилей, если оно там есть
-            }, // Перезапишет свойства background, text-align и overflow-x селектора .tint .popup', если они есть. Если их нет - добавит. Если свойство имеет значение false, то оно удаляется из дефолтных стилей.
-            '.tint': false, // удалит селектор .tint из дефолтных стилей (подобным образом удаляется любой селектор со значением false)
-            '.popup .my-selector': {
+            }, // Перезапишет свойства background, text-align и overflow-x селектора .simple-popup, если они есть. Если их нет - добавит. Если свойство имеет значение false, то оно удаляется из дефолтных стилей.
+            '.simple-popup-tint': false, // удалит селектор .simple-popup-tint из дефолтных стилей (подобным образом удаляется любой селектор со значением false)
+            '.simple-popup .my-selector': {
                 display: 'inline-block',
                 margin: '20px 0'
-            } // добавит дополнительный селектор '.popup .my-selector' в таблицу стилей (т.к. его ещё не было)
-            },
+            } // добавит дополнительный селектор '.simple-popup .my-selector' в таблицу стилей (т.к. его ещё не было)
+        },
         mediaStyles: {
             '@media screen and (max-width: 990px)': {
-                '.tint .popup button, .popup input[type="submit"]': {
+                '.simple-popup button, .simple-popup input[type="submit"]': {
                     background: '#f00' // задаёт красный стиль для кнопок попапа при разрешении меньше 990px
                 }
             }
@@ -86,7 +86,7 @@ $(document).ready(function(){
                 myPopup.close();
             },
             closerCallback: function(){
-                // callback, который вызывается при нажатии на .closer (крестик)
+                // callback, который вызывается при нажатии на .simple-popup__closer (крестик)
                 // так же как и выше, пишем в консоль свою метку
                 console.log('closer clicked');
                 // а уже на закрытие попапа вешаем свой callback, при этом после его выполнения - блокируем дальнейшее выполнение скрипта (т.е. попап не закрывается) вторым параметром true. Если его не передавать, то попап после коллбека закроется.
