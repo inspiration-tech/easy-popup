@@ -243,13 +243,21 @@ var myPopup = new SimplePopup(params);
 ИЗМЕНЕНИЯ В ВЕРСИИ 2.0.0
 -------------
 1) Изменены основные CSS-классы попапа:
+
     `.tint` -> `.simple-popup-tint`
+    
     `.popup` -> `.simple-popup`
+    
     `.heading` -> `.simple-popup__heading`
+    
     `.body` -> `.simple-popup__body`
+    
     `.text` -> `.simple-popup__text`
+    
     `.closer` -> `.simple-popup__closer`
+    
     `.h_overflow` -> `.simple-popup_overflow`
+    
 2) Добавлены методы ***setLoading*** и ***unsetLoading***, отвечающие за отображение/скрытие полноэкранного индикатора загрузки (подробное описание см. выше в списке методов).
 3) В конструктор попапа добавлен параметр ***minLoadingTime***, обозначающий минимальное время, в течение которого должна отображаться анимация загрузки, а также параметр ***loadingPic*** - URL картинки, которая будет использоваться в качестве индикатора загрузки.
 4) Объект попапа переименован из ***Popup*** в ***SimplePopup***.
