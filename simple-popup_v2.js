@@ -471,7 +471,9 @@ window.SimplePopup = function() {
         var tint = $('.simple-popup-tint');
         tint.show().addClass('active');
         this.isActive = true;
-        $('body,html').addClass('simple-popup_overflow');
+        // добавляем блокатор скролла, только если это не ios
+        if (navigator.platform.indexOf('iPad') === -1 && navigator.platform.indexOf('iPhone') === -1)
+            $('body,html').addClass('simple-popup_overflow');
         $('body').scrollTop(this.scrollTop);
         if (!elem.hasClass('active')) {
             elem.addClass('active');
