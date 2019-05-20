@@ -431,6 +431,16 @@ window.SimplePopup = function() {
             return this;
         }
 
+        // если имя попапа === false - нужно только показать тинт, а дальнейшая обработка не требуется
+        if (showParams.name === false) {
+            // отображение попапа
+            var tint = $('.simple-popup-tint');
+            tint.show().addClass('active');
+            this.isActive = true;
+
+            return this;
+        }
+
         elem = $('.simple-popup-tint .simple-popup[data-name="'+showParams.name+'"]');
         if (!elem.length)
             elem = $('.simple-popup-tint .simple-popup[data-name="'+(showParams.name = 'message')+'"]');
