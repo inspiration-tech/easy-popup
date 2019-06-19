@@ -11,9 +11,12 @@ window.SimplePopup = function() {
             closeOnEsc: true,
             confirmOnEnter: true,
             minLoadingTime: 0,
-            loadingPic: false
+            loadingPic: false,
+            appendTo: false,
+            noScrollTop: false
         },
         Popup = this,
+        defaultPopupParent = 'body',
         params = arguments.length ? arguments[0] : {},
         titleHashBase = '958c1d72380718e5f4b576299fb5ea0c',
         StyleSheet,
@@ -128,8 +131,10 @@ window.SimplePopup = function() {
     }
 
     $(function(){
-        if (!$('.simple-popup-tint').length)
-            $('body').append('<div class="simple-popup-tint"></div>');
+        var $popupParent = $(Popup.appendTo).length ? $(Popup.appendTo) : $(defaultPopupParent);
+
+        if (!$popupParent.children('.simple-popup-tint').length)
+            $($popupParent).append('<div class="simple-popup-tint"></div>');
 
         var html = '';
         for (var name in templates) {
@@ -199,7 +204,7 @@ window.SimplePopup = function() {
                 top: '0',
                 left: '0',
                 transition: 'all 150ms',
-                background: 'url('+getLoadingPic()+') center center / 100px no-repeat rgba(255, 255, 255, 0.7)'
+                background: 'url('+this.defaultLoadingPic+') center center / 100px no-repeat rgba(255, 255, 255, 0.7)'
             },
             '.simple-popup-tint.is_loading .simple-popup__loading': {
                 visibility: 'visible',
@@ -481,10 +486,15 @@ window.SimplePopup = function() {
         var tint = $('.simple-popup-tint');
         tint.show().addClass('active');
         this.isActive = true;
-        // добавляем блокатор скролла, только если это не ios
-        if (navigator.platform.indexOf('iPad') === -1 && navigator.platform.indexOf('iPhone') === -1)
-            $('body,html').addClass('simple-popup_overflow');
-        $('body').scrollTop(this.scrollTop);
+
+        // если не отключена автопрокрутка
+        if (!this.noScrollTop) {
+            // добавляем блокатор скролла, только если это не ios
+            if (navigator.platform.indexOf('iPad') === -1 && navigator.platform.indexOf('iPhone') === -1)
+                $('body,html').addClass('simple-popup_overflow');
+            $('body').scrollTop(this.scrollTop);
+        }
+
         if (!elem.hasClass('active')) {
             elem.addClass('active');
             elem.show(this.speed);
@@ -575,9 +585,12 @@ window.SimplePopup = function() {
 
         var popup = $('.simple-popup');
         popup.removeClass('active');
-        $('body,html').removeClass('simple-popup_overflow');
-        $('body').scrollTop(0);
-        $(document).scrollTop(this.scrollTop);
+        // если не отключена автопрокрутка
+        if (!this.noScrollTop) {
+            $('body,html').removeClass('simple-popup_overflow');
+            $('body').scrollTop(0);
+            $(document).scrollTop(this.scrollTop);
+        }
         popup.hide(this.speed);
 
         this.actionState = true;
