@@ -1,0 +1,1 @@
+import '../src/css/simple-popup.less';

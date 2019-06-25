@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>simple-popup</title>
+
+    <!-- <link rel="stylesheet" type="text/css" href="../src/css/simple-popup.min.css" />-->
+    <script src="../src/simple-popup.js"></script>
+    <style>
+        body {
+            margin: 0 !important;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            window.popup = new SimplePopup({
+                speed: 210,
+                closeOnBackgroundClick: false, // запрет коллбеков при клике на фон
+                closeOnEsc: false, // запрет коллбеков при нажатии Esc
+                confirmOnEnter: false, // запрет коллбеков при нажатии Enter
+                templates: {
+                    test: '<div class="simple-popup" data-name="test">test</div>'
+                },
+                styles: {
+                    '.simple-popup': {
+                        background: 'grey'
+                    }
+                },
+                mediaStyles: true,
+                minLoadingTime: 5000,
+                noScrollTop: true
+            });
+
+            document.querySelector('button').addEventListener('click', function(){
+                popup.show();
+            });
+        };
+    </script>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div>simple-popup test page</div>
+        <br><br>
+        <div><button>call simple-popup</button></div>
+    </div>
+</body>
+</html>

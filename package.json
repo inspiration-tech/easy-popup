@@ -1,0 +1,43 @@
+{
+  "name": "simple-popup",
+  "version": "3.0.0",
+  "description": "Simple js-script for everyday work with popups",
+  "scripts": {
+    "build": "webpack -p --env.NODE_ENV=prod test/test.js -o ./test/test.min.js --config ./__config/webpack.default.js",
+    "dev": "webpack -d --env.NODE_ENV=dev test/test.js -o ./test/test.min.js --config ./__config/webpack.default.js",
+    "build-css": "webpack -d --env.NODE_ENV=dev __config/build-less.js -o ./__config/build-less.min.js --config ./__config/webpack.default.js",
+    "build-css-min": "webpack -p --env.NODE_ENV=prod __config/build-less.js -o ./__config/build-less.min.js --config ./__config/webpack.default.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.0",
+    "extract-loader": "^2.0.1",
+    "file-loader": "^2.0.0",
+    "less": "^3.7.1",
+    "less-loader": "^4.1.0",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0"
+  },
+  "optionalDependencies": {
+    "@babel/polyfill": "^7.0.0"
+  },
+  "private": false,
+  "main": "./src/simple-popup_module.js",
+  "authors": [
+    {
+      "name": "Vladimir Bakulin"
+    }
+  ],
+  "deprecated": false,
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inspiration-tech/simple-popup"
+  }
+}
