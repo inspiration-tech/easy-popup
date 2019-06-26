@@ -4,10 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <title>simple-popup</title>
+    <title>easy-popup</title>
 
-    <!-- <link rel="stylesheet" type="text/css" href="../src/css/simple-popup.min.css" />-->
-    <script src="../src/simple-popup.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="../src/css/easy-popup.min.css" />-->
+    <script src="../src/easy-popup.js"></script>
     <style>
         body {
             margin: 0 !important;
@@ -15,16 +15,16 @@
     </style>
     <script>
         window.onload = function(){
-            window.popup = new SimplePopup({
+            window.popup = new EasyPopup({
                 speed: 210,
                 closeOnBackgroundClick: false, // запрет коллбеков при клике на фон
                 closeOnEsc: false, // запрет коллбеков при нажатии Esc
                 confirmOnEnter: false, // запрет коллбеков при нажатии Enter
                 templates: {
-                    test: '<div class="simple-popup" data-name="test">test</div>'
+                    test: '<div class="easy-popup" data-name="test">test</div>'
                 },
                 styles: {
-                    '.simple-popup': {
+                    '.easy-popup': {
                         background: 'grey'
                     }
                 },
@@ -41,9 +41,9 @@
 </head>
 <body>
     <div class="page-wrapper">
-        <div>simple-popup test page</div>
+        <div>easy-popup test page</div>
         <br><br>
-        <div><button>call simple-popup</button></div>
+        <div><button>call easy-popup</button></div>
     </div>
 </body>
 </html>

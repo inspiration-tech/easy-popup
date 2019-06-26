@@ -1,6 +1,6 @@
-// https://github.com/inspiration-tech/simple-popup
+// https://github.com/inspiration-tech/easy-popup
 
-window.SimplePopup = function() {
+window.EasyPopup = function() {
     var defaults = {
             speed: 150,
             styles: false,
@@ -14,8 +14,8 @@ window.SimplePopup = function() {
             loadingPic: false,
             appendTo: false,
             noScrollTop: false,
-            defaultAnimationShow: 'simplePopupShow',
-            defaultAnimationClose: 'simplePopupClose',
+            defaultAnimationShow: 'easyPopupShow',
+            defaultAnimationClose: 'easyPopupClose',
             id: (+new Date + Math.floor(Math.random() * 10E+10)).toString(36)
         },
         Popup = this,
@@ -130,27 +130,27 @@ window.SimplePopup = function() {
 
 
     var templates = {
-        message: '<div class="simple-popup" data-name="message">' +
-            '<div class="simple-popup__closer">' +
+        message: '<div class="easy-popup" data-name="message">' +
+            '<div class="easy-popup__closer">' +
             '<div></div>' +
             '<div></div>' +
             '</div>' +
-            '<div class="simple-popup__heading"></div>' +
-            '<div class="simple-popup__body">' +
-            '<div class="simple-popup__text"></div>' +
+            '<div class="easy-popup__heading"></div>' +
+            '<div class="easy-popup__body">' +
+            '<div class="easy-popup__text"></div>' +
             '<div class="button_wrapper">' +
             '<button class="closing_button" id="close_btn">ОК</button>' +
             '</div>' +
             '</div>' +
             '</div>',
-        confirm: '<div class="simple-popup" data-name="confirm">' +
-            '<div class="simple-popup__closer">' +
+        confirm: '<div class="easy-popup" data-name="confirm">' +
+            '<div class="easy-popup__closer">' +
             '<div></div>' +
             '<div></div>' +
             '</div>' +
-            '<div class="simple-popup__heading"></div>' +
-            '<div class="simple-popup__body">' +
-            '<div class="simple-popup__text"></div>' +
+            '<div class="easy-popup__heading"></div>' +
+            '<div class="easy-popup__body">' +
+            '<div class="easy-popup__text"></div>' +
             '<div class="button_wrapper">' +
             '<button class="confirm_button">Принять</button>' +
             '<button class="closing_button">Отклонить</button>' +
@@ -172,12 +172,12 @@ window.SimplePopup = function() {
     localFunctions.ready(function(){
         var popupSelector = Popup.appendTo ? Popup.appendTo : defaultPopupParent,
             popupParent = document.querySelector(popupSelector),
-            popupTint = document.querySelector(popupSelector + ' > .simple-popup-tint');
+            popupTint = document.querySelector(popupSelector + ' > .easy-popup-tint');
 
         if (popupTint)
             popupTint.dataset.id = Popup.id;
         else
-            popupParent.innerHTML += '<div class="simple-popup-tint" data-id="'+Popup.id+'"></div>';
+            popupParent.innerHTML += '<div class="easy-popup-tint" data-id="'+Popup.id+'"></div>';
 
         var html = '';
         for (var name in templates) {
@@ -186,7 +186,7 @@ window.SimplePopup = function() {
 
             if (templates[name] === false) {
                 delete templates[name];
-                var popupItem = document.querySelectorAll('.simple-popup-tint[data-id="'+Popup.id+'"] .simple-popup[data-name="'+name+'"]');
+                var popupItem = document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] .easy-popup[data-name="'+name+'"]');
                 if (popupItem.length) {
                     //popupItem.remove();
                     Array.prototype.forEach.call(popupItem, function(node){
@@ -196,18 +196,18 @@ window.SimplePopup = function() {
                 continue;
             }
 
-            if (!document.querySelectorAll('.simple-popup-tint[data-id="'+Popup.id+'"] .simple-popup[data-name="'+name+'"]').length)
+            if (!document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] .easy-popup[data-name="'+name+'"]').length)
                 html += templates[name];
         }
 
-        if (!document.querySelector('.simple-popup-tint[data-id="'+Popup.id+'"] .simple-popup__loading'))
-            html += '<div class="simple-popup__loading"></div>';
+        if (!document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"] .easy-popup__loading'))
+            html += '<div class="easy-popup__loading"></div>';
 
-        //$('.simple-popup-tint').append(html);
-        document.querySelector('.simple-popup-tint[data-id="'+Popup.id+'"]').innerHTML += html;
+        //$('.easy-popup-tint').append(html);
+        document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"]').innerHTML += html;
 
-        //$('.simple-popup').hide(); // по умолчанию у попапов display inline-block, поэтому нужно скрыть
-        Array.prototype.forEach.call(document.querySelectorAll('.simple-popup'), function(node){
+        //$('.easy-popup').hide(); // по умолчанию у попапов display inline-block, поэтому нужно скрыть
+        Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
             node.style.display = 'none';
         });
     });
@@ -224,7 +224,7 @@ window.SimplePopup = function() {
         * */
 
         var scriptStyles = {
-            '.simple-popup-tint[data-id]': {
+            '.easy-popup-tint[data-id]': {
                 position: 'fixed',
                 display: 'none',
                 width: '100%',
@@ -240,13 +240,13 @@ window.SimplePopup = function() {
                 textAlign: 'center',
                 verticalAlign: 'middle'
             },
-            '.simple-popup-tint[data-id]::after': {
+            '.easy-popup-tint[data-id]::after': {
                 display: 'inline-block',
                 height: '100%',
                 content: '',
                 verticalAlign: 'middle'
             },
-            '.simple-popup__loading': {
+            '.easy-popup__loading': {
                 visibility: 'hidden',
                 position: 'fixed',
                 width: '100vw',
@@ -257,11 +257,11 @@ window.SimplePopup = function() {
                 transition: 'all 150ms',
                 background: 'url('+this.defaultLoadingPic+') center center / 50px no-repeat rgba(255, 255, 255, 0.7)'
             },
-            '.simple-popup-tint[data-id].is_loading .simple-popup__loading': {
+            '.easy-popup-tint[data-id].is_loading .easy-popup__loading': {
                 visibility: 'visible',
                 zIndex: '10001'
             },
-            '.simple-popup': {
+            '.easy-popup': {
                 position: 'relative',
                 display: 'inline-block',
                 background: '#fff',
@@ -274,7 +274,7 @@ window.SimplePopup = function() {
                 overflow: 'hidden',
                 boxShadow: '0 0 15px #fff'
             },
-            '.simple-popup__heading': {
+            '.easy-popup__heading': {
                 height: '43px',
                 background: '#34991b',
                 font: 'bold 30px/45px Arial',
@@ -284,10 +284,10 @@ window.SimplePopup = function() {
                 padding: '0 17px',
                 margin: 'auto'
             },
-            '.simple-popup__body': {
+            '.easy-popup__body': {
                 padding: '12px 17px 27px'
             },
-            '.simple-popup__closer': {
+            '.easy-popup__closer': {
                 position: 'absolute',
                 width: '25px',
                 height: '25px',
@@ -296,7 +296,7 @@ window.SimplePopup = function() {
                 cursor: 'pointer',
                 transition: 'all 280ms'
             },
-            '.simple-popup__closer > div': {
+            '.easy-popup__closer > div': {
                 position: 'absolute',
                 left: '11px',
                 width: '3px',
@@ -305,22 +305,22 @@ window.SimplePopup = function() {
                 borderRadius: '3px',
                 transition: 'all 280ms'
             },
-            '.simple-popup__closer > div:nth-child(1)': {
+            '.easy-popup__closer > div:nth-child(1)': {
                 WebkitTransform: 'rotate(45deg)',
                 transform: 'rotate(45deg)'
             },
-            '.simple-popup__closer > div:nth-child(2)': {
+            '.easy-popup__closer > div:nth-child(2)': {
                 WebkitTransform: 'rotate(-45deg)',
                 transform: 'rotate(-45deg)'
             },
-            '.simple-popup__closer:hover': {
+            '.easy-popup__closer:hover': {
                 WebkitTransform: 'scale3d(1.3, 1.3, 0.2)',
                 transform: 'scale3d(1.3, 1.3, 0.2)'
             },
-            '.simple-popup__closer:hover > div': {
+            '.easy-popup__closer:hover > div': {
                 background: '#9cd1d4'
             },
-            '.simple-popup button, .simple-popup input[type="submit"]': {
+            '.easy-popup button, .easy-popup input[type="submit"]': {
                 display: 'inline-block',
                 margin: 'auto',
                 background: '#34991b',
@@ -333,25 +333,25 @@ window.SimplePopup = function() {
                 transition: 'all 250ms',
                 border: 'none'
             },
-            '.simple-popup button:hover, .simple-popup input[type="submit"]:hover': {
+            '.easy-popup button:hover, .easy-popup input[type="submit"]:hover': {
                 opacity: 0.7
             },
-            '.simple-popup__body .closing_button': {
+            '.easy-popup__body .closing_button': {
                 marginTop: '10px'
             },
-            '.simple-popup__text': {
+            '.easy-popup__text': {
                 marginBottom: '16px',
                 textAlign: 'center'
             },
-            '.simple-popup .input_wrapper': {
+            '.easy-popup .input_wrapper': {
                 marginBottom: '10px'
             },
-            '.simple-popup .button_wrapper button': {
+            '.easy-popup .button_wrapper button': {
                 display: 'inline-block',
                 marginLeft: '10px',
                 marginRight: '10px'
             },
-            'body.simple-popup_overflow, html.simple-popup_overflow': {
+            'body.easy-popup_overflow, html.easy-popup_overflow': {
                 overflow: 'hidden !important',
                 height: '100vh',
                 width: '100%',
@@ -360,7 +360,7 @@ window.SimplePopup = function() {
         };
 
         var scriptMediaStyles = {
-            '@keyframes simplePopupShow': {
+            '@keyframes easyPopupShow': {
                 'from': {
                     opacity: 0,
                     transform: 'scale3d(0.3, 0.3, 0.3)',
@@ -370,7 +370,7 @@ window.SimplePopup = function() {
                     opacity: 1
                 }
             },
-            '@-webkit-keyframes simplePopupShow': {
+            '@-webkit-keyframes easyPopupShow': {
                 'from': {
                     opacity: 0,
                     transform: 'scale3d(0.3, 0.3, 0.3)',
@@ -380,7 +380,7 @@ window.SimplePopup = function() {
                     opacity: 1
                 }
             },
-            '@keyframes simplePopupClose': {
+            '@keyframes easyPopupClose': {
                 'from': {
                     opacity: 1,
                 },
@@ -393,7 +393,7 @@ window.SimplePopup = function() {
                     opacity: 0
                 }
             },
-            '@-webkit-keyframes simplePopupClose': {
+            '@-webkit-keyframes easyPopupClose': {
                 'from': {
                     opacity: 1,
                 },
@@ -523,7 +523,7 @@ window.SimplePopup = function() {
                 closerCallback: function(){},
                 closingBtnCallback: false, // если на .closing_button нужно повесить отдельный callback - передать сюда
                 confirmBtnCallback: function(){}, // если на .confirm_button нужно повесить отдельный callback - передать сюда
-                backgroundClickCallback: false, // если при клике на .simple-popup-tint (фон) нужен отдельный callback - передать сюда
+                backgroundClickCallback: false, // если при клике на .easy-popup-tint (фон) нужен отдельный callback - передать сюда
                 callbackOnEsc: false, // если при нажатии Esc нужен отдельный callback - передать сюда
                 callbackOnEnter: false, // если при нажатии Enter нужен отдельный callback - передать сюда,
                 closingBtnText: false,
@@ -544,7 +544,7 @@ window.SimplePopup = function() {
         }
 
         // смотрим, есть ли уже открытые (активные) попапы
-        var activePopups = document.querySelectorAll('.simple-popup.active');
+        var activePopups = document.querySelectorAll('.easy-popup.active');
         if (activePopups.length){
             var animationNameOut = showParams.animationClose && typeof showParams.animationClose === 'string' ? showParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = this.speed + 'ms ' + animationNameOut + ' 1 linear';
@@ -557,7 +557,7 @@ window.SimplePopup = function() {
 
             setTimeout(function(){
                 // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
-                Array.prototype.forEach.call(document.querySelectorAll('.simple-popup'), function(node){
+                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
                     node.style.display = 'none';
                 });
                 Popup.show(showParams);
@@ -569,7 +569,7 @@ window.SimplePopup = function() {
         // если имя попапа === false - нужно только показать тинт, а дальнейшая обработка не требуется
         if (showParams.name === false) {
             // отображение попапа (а точнее, тинта)
-            var tintOnly = document.querySelector('.simple-popup-tint[data-id="'+this.id+'"]');
+            var tintOnly = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
             tintOnly.style.display = 'block';
             localFunctions.addClass(tintOnly, 'active');
             this.isActive = true;
@@ -577,25 +577,25 @@ window.SimplePopup = function() {
             return this;
         }
 
-        elem = document.querySelector('.simple-popup-tint[data-id="'+this.id+'"] .simple-popup[data-name="'+showParams.name+'"]');
+        elem = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup[data-name="'+showParams.name+'"]');
         if (!elem)
-            elem = document.querySelector('.simple-popup-tint[data-id="'+this.id+'"] .simple-popup[data-name="'+(showParams.name = 'message')+'"]');
+            elem = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup[data-name="'+(showParams.name = 'message')+'"]');
         if (!elem)
-            elem = document.querySelector('.simple-popup-tint[data-id="'+this.id+'"] .simple-popup:first-child');
+            elem = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup:first-child');
 
         // вставка контента в попап
         if (showParams.title !== false) {
-            var popupHeading = elem.querySelector('.simple-popup__heading');
+            var popupHeading = elem.querySelector('.easy-popup__heading');
             if (popupHeading)
                 popupHeading.innerHTML = showParams.title;
         }
         if (showParams.html) {
-            var popupBody = elem.querySelector('.simple-popup__body');
+            var popupBody = elem.querySelector('.easy-popup__body');
             if (popupBody)
                 popupBody.innerHTML = showParams.html;
         } else {
             if (showParams.text !== false) {
-                var popupText = elem.querySelector('.simple-popup__text');
+                var popupText = elem.querySelector('.easy-popup__text');
                 if (popupText)
                     popupText.innerHTML = showParams.text;
             }
@@ -629,7 +629,7 @@ window.SimplePopup = function() {
         if (!this.isActive)
             this.scrollTop = scrollingElement.scrollTop;
         // отображение попапа
-        var tint = document.querySelector('.simple-popup-tint[data-id="'+this.id+'"]');
+        var tint = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
         tint.style.display = 'block';
         localFunctions.addClass(tint,'active');
         this.isActive = true;
@@ -640,7 +640,7 @@ window.SimplePopup = function() {
             // добавляем блокатор скролла, только если это не ios
             if (navigator.platform.indexOf('iPad') === -1 && navigator.platform.indexOf('iPhone') === -1) {
                 var htmlEl = document.querySelector('html'),
-                    className = 'simple-popup_overflow';
+                    className = 'easy-popup_overflow';
 
                 localFunctions.addClass(bodyEl, className);
                 localFunctions.addClass(htmlEl, className);
@@ -661,7 +661,7 @@ window.SimplePopup = function() {
 
         var closingBtn = elem.querySelector('.closing_button'),
             confirmBtn = elem.querySelector('.confirm_button'),
-            popupCloser = elem.querySelector('.simple-popup__closer');
+            popupCloser = elem.querySelector('.easy-popup__closer');
 
         // если есть неснятые события от предыдущего попапа - снять их
         if (this.hasOwnProperty('keydownCallbackEsc')) {
@@ -693,7 +693,7 @@ window.SimplePopup = function() {
             if (typeof showParams.closerCallback !== 'object' || !showParams.closerCallback.hasOwnProperty('closerOff') || showParams.closerCallback.closerOff !== true) {
                 if (Popup.actionState)
                     return false;
-                // базовый callback, который происходит при нажатии на .simple-popup__closer
+                // базовый callback, который происходит при нажатии на .easy-popup__closer
                 Popup.close();
             }
 
@@ -728,7 +728,7 @@ window.SimplePopup = function() {
         // если включено закрытие попапа по клику на фон
         if (Popup.allowBackgroundCallback) {
             this.tintCallback = function(){
-                if (!Popup.isLoading && !document.querySelector('.simple-popup-tint[data-id="'+Popup.id+'"] .simple-popup:hover')) {
+                if (!Popup.isLoading && !document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"] .easy-popup:hover')) {
                     (showParams.backgroundClickCallback ? showParams.backgroundClickCallback : Popup.closerCallbackMain)();
                     this.removeEventListener('click', Popup.tintCallback);
                 }
@@ -815,7 +815,7 @@ window.SimplePopup = function() {
         if (closeParams.stopAfterCallback === true)
             return this;
 
-        var activePopups = document.querySelectorAll('.simple-popup.active');
+        var activePopups = document.querySelectorAll('.easy-popup.active');
         if (activePopups.length){
             var animationNameOut = closeParams.animationClose && typeof closeParams.animationClose === 'string' ? closeParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = this.speed + 'ms ' + animationNameOut + ' 1 linear';
@@ -828,7 +828,7 @@ window.SimplePopup = function() {
 
             setTimeout(function(){
                 // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
-                Array.prototype.forEach.call(document.querySelectorAll('.simple-popup'), function(node){
+                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
                     node.style.display = 'none';
                 });
             },this.speed);
@@ -836,7 +836,7 @@ window.SimplePopup = function() {
         // если не отключена автопрокрутка
         if (!this.noScrollTop) {
             var scrollingElement = document.scrollingElement || document.documentElement,
-                classToRemove = 'simple-popup_overflow';
+                classToRemove = 'easy-popup_overflow';
             localFunctions.removeClass(document.querySelector('html'), classToRemove);
             localFunctions.removeClass(document.querySelector('body'), classToRemove);
             document.querySelector('body').scrollTop = 0;
@@ -846,7 +846,7 @@ window.SimplePopup = function() {
         this.actionState = true;
         setTimeout(function(){
             //$('html, body').stop(true);
-            var tint = document.querySelector('.simple-popup-tint[data-id="'+Popup.id+'"]');
+            var tint = document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"]');
             tint.style.display = 'none';
             localFunctions.removeClass(tint, 'active');
             Popup.isActive = false;
@@ -863,11 +863,11 @@ window.SimplePopup = function() {
     this.setLoading = function() {
         // добавляем класс загрузки
         Popup.isLoading = true;
-        localFunctions.addClass(document.querySelector('.simple-popup-tint[data-id="'+this.id+'"]'), 'is_loading');
+        localFunctions.addClass(document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]'), 'is_loading');
 
         // если задана картинка загрузки - ставим её на загрузку вместо стандартной крутилки (сначала проверяем - передана ли картинка напрямую в метод, потом - передана ли в конструктор)
         var loadingPic = arguments.length > 1 && arguments[1] ? arguments[1] : this.defaultLoadingPic;
-        document.querySelector('.simple-popup__loading').style.backgroundImage = 'url("'+loadingPic+'")';
+        document.querySelector('.easy-popup__loading').style.backgroundImage = 'url("'+loadingPic+'")';
 
         // получаем минимальное время загрузки
         var minLoadingTime = arguments.length && arguments[0] !== false && arguments[0] !== null ? arguments[0] : Math.max(this.minLoadingTime, this.speed);
@@ -895,7 +895,7 @@ window.SimplePopup = function() {
 
         // таймаут не установлен, - значит снять класс загрузки
         Popup.isLoading = false;
-        localFunctions.removeClass(document.querySelector('.simple-popup-tint[data-id="'+this.id+'"]'), 'is_loading');
+        localFunctions.removeClass(document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]'), 'is_loading');
 
         return this;
     };

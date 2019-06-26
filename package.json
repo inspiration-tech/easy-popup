@@ -1,5 +1,5 @@
 {
-  "name": "simple-popup",
+  "name": "easy-popup",
   "version": "3.0.0",
   "description": "Simple js-script for everyday work with popups",
   "scripts": {
@@ -28,7 +28,7 @@
     "@babel/polyfill": "^7.0.0"
   },
   "private": false,
-  "main": "./src/simple-popup_module.js",
+  "main": "./src/easy-popup_module.js",
   "authors": [
     {
       "name": "Vladimir Bakulin"
@@ -38,6 +38,6 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/inspiration-tech/simple-popup"
+    "url": "https://github.com/inspiration-tech/easy-popup"
   }
 }

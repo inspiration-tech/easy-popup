@@ -1,1 +1,1 @@
-import '../src/css/simple-popup.less';
+import '../src/css/easy-popup.less';

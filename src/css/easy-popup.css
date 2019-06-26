@@ -1,4 +1,4 @@
-.simple-popup {
+.easy-popup {
   position: relative;
   display: inline-block;
   background: #fff;
@@ -11,8 +11,8 @@
   overflow: hidden;
   box-shadow: 0 0 15px #fff;
 }
-.simple-popup button,
-.simple-popup input[type="submit"] {
+.easy-popup button,
+.easy-popup input[type="submit"] {
   display: inline-block;
   margin: auto;
   background: #34991b;
@@ -25,29 +25,29 @@
   transition: all 250ms;
   border: none;
 }
-.simple-popup button:hover,
-.simple-popup input[type="submit"]:hover {
+.easy-popup button:hover,
+.easy-popup input[type="submit"]:hover {
   opacity: 0.7;
 }
-.simple-popup .input_wrapper {
+.easy-popup .input_wrapper {
   margin-bottom: 10px;
 }
-.simple-popup .button_wrapper button {
+.easy-popup .button_wrapper button {
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
 }
-.simple-popup .closing_button {
+.easy-popup .closing_button {
   margin-top: 10px;
 }
-body.simple-popup_overflow,
-html.simple-popup_overflow {
+body.easy-popup_overflow,
+html.easy-popup_overflow {
   overflow: hidden !important;
   height: 100vh;
   width: 100%;
   position: fixed;
 }
-.simple-popup-tint {
+.easy-popup-tint {
   position: fixed;
   display: none;
   width: 100%;
@@ -63,17 +63,17 @@ html.simple-popup_overflow {
   text-align: center;
   vertical-align: middle;
 }
-.simple-popup-tint::after {
+.easy-popup-tint::after {
   display: inline-block;
   height: 100%;
   content: '';
   vertical-align: middle;
 }
-.simple-popup-tint.is_loading .simple-popup__loading {
+.easy-popup-tint.is_loading .easy-popup__loading {
   visibility: visible;
   z-index: 10001;
 }
-.simple-popup__loading {
+.easy-popup__loading {
   visibility: hidden;
   background: center center / 50px no-repeat rgba(255, 255, 255, 0.7);
   position: fixed;
@@ -84,7 +84,7 @@ html.simple-popup_overflow {
   left: 0;
   transition: all 150ms;
 }
-.simple-popup__heading {
+.easy-popup__heading {
   height: 43px;
   background: #34991b;
   font: bold 30px/45px Arial;
@@ -94,10 +94,10 @@ html.simple-popup_overflow {
   padding: 0 17px;
   margin: auto;
 }
-.simple-popup__body {
+.easy-popup__body {
   padding: 12px 17px 27px;
 }
-.simple-popup__closer {
+.easy-popup__closer {
   position: absolute;
   width: 25px;
   height: 25px;
@@ -106,7 +106,7 @@ html.simple-popup_overflow {
   cursor: pointer;
   transition: all 280ms;
 }
-.simple-popup__closer > div {
+.easy-popup__closer > div {
   position: absolute;
   left: 11px;
   width: 3px;
@@ -115,26 +115,26 @@ html.simple-popup_overflow {
   border-radius: 3px;
   transition: all 280ms;
 }
-.simple-popup__closer > div:nth-child(1) {
+.easy-popup__closer > div:nth-child(1) {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-.simple-popup__closer > div:nth-child(2) {
+.easy-popup__closer > div:nth-child(2) {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-.simple-popup__closer:hover {
+.easy-popup__closer:hover {
   -webkit-transform: scale3d(1.3, 1.3, 0.2);
   transform: scale3d(1.3, 1.3, 0.2);
 }
-.simple-popup__closer:hover > div {
+.easy-popup__closer:hover > div {
   background: #9cd1d4;
 }
-.simple-popup__text {
+.easy-popup__text {
   margin-bottom: 16px;
   text-align: center;
 }
-@-webkit-keyframes simplePopupShow {
+@-webkit-keyframes easyPopupShow {
   from {
     opacity: 0;
     -webkit-transform: scale3d(0.3, 0.3, 0.3);
@@ -144,7 +144,7 @@ html.simple-popup_overflow {
     opacity: 1;
   }
 }
-@keyframes simplePopupShow {
+@keyframes easyPopupShow {
   from {
     opacity: 0;
     -webkit-transform: scale3d(0.3, 0.3, 0.3);
@@ -154,7 +154,7 @@ html.simple-popup_overflow {
     opacity: 1;
   }
 }
-@-webkit-keyframes simplePopupClose {
+@-webkit-keyframes easyPopupClose {
   from {
     opacity: 1;
   }
@@ -167,7 +167,7 @@ html.simple-popup_overflow {
     opacity: 0;
   }
 }
-@keyframes simplePopupClose {
+@keyframes easyPopupClose {
   from {
     opacity: 1;
   }

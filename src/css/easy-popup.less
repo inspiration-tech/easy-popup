@@ -1,4 +1,4 @@
-.simple-popup {
+.easy-popup {
     position: relative;
     display: inline-block;
     background: #fff;
@@ -43,7 +43,7 @@
     }
 }
 
-.simple-popup_overflow {
+.easy-popup_overflow {
     body&,
     html& {
         overflow: hidden !important;
@@ -52,7 +52,7 @@
         position: fixed;
     }
 }
-.simple-popup-tint {
+.easy-popup-tint {
     position: fixed;
     display: none;
     width: 100%;
@@ -75,12 +75,12 @@
         vertical-align: middle;
     }
 
-    &.is_loading .simple-popup__loading {
+    &.is_loading .easy-popup__loading {
         visibility: visible;
         z-index: 10001;
     }
 }
-.simple-popup__loading {
+.easy-popup__loading {
     visibility: hidden;
     background: center center / 50px no-repeat rgba(255, 255, 255, 0.7);
     position: fixed;
@@ -92,7 +92,7 @@
     transition: all 150ms;
 }
 
-.simple-popup__heading {
+.easy-popup__heading {
     height: 43px;
     background: #34991b;
     font: bold 30px/45px Arial;
@@ -102,10 +102,10 @@
     padding: 0 17px;
     margin: auto;
 }
-.simple-popup__body {
+.easy-popup__body {
     padding: 12px 17px 27px;
 }
-.simple-popup__closer {
+.easy-popup__closer {
     position: absolute;
     width: 25px;
     height: 25px;
@@ -142,14 +142,14 @@
     }
 
 }
-.simple-popup__text {
+.easy-popup__text {
     margin-bottom: 16px;
     text-align: center;
 }
 
 // keyframes заимствованы из animate.css: zoomIn и zoomOut
 
-@-webkit-keyframes simplePopupShow {
+@-webkit-keyframes easyPopupShow {
     from {
         opacity: 0;
         -webkit-transform: scale3d(0.3, 0.3, 0.3);
@@ -161,7 +161,7 @@
     }
 }
 
-@keyframes simplePopupShow {
+@keyframes easyPopupShow {
     from {
         opacity: 0;
         -webkit-transform: scale3d(0.3, 0.3, 0.3);
@@ -173,7 +173,7 @@
     }
 }
 
-@-webkit-keyframes simplePopupClose {
+@-webkit-keyframes easyPopupClose {
     from {
         opacity: 1;
     }
@@ -189,7 +189,7 @@
     }
 }
 
-@keyframes simplePopupClose {
+@keyframes easyPopupClose {
     from {
         opacity: 1;
     }
