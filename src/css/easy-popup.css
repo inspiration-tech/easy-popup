@@ -73,6 +73,10 @@ html.easy-popup_overflow {
   visibility: visible;
   z-index: 10001;
 }
+body .easy-popup-tint {
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+}
 .easy-popup__loading {
   visibility: hidden;
   background: center center / 50px no-repeat rgba(255, 255, 255, 0.7);

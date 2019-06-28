@@ -1,6 +1,6 @@
 {
   "name": "easy-popup",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Simple js-script for everyday work with popups",
   "scripts": {
     "build": "webpack -p --env.NODE_ENV=prod test/test.js -o ./test/test.min.js --config ./__config/webpack.default.js",
