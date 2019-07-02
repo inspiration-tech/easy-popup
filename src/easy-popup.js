@@ -261,6 +261,11 @@ window.EasyPopup = function() {
                 visibility: 'visible',
                 zIndex: '10001'
             },
+            'body .easy-popup-tint[data-id]': {
+                // ios scroll fix
+                WebkitOverflowScrolling: 'touch',
+                overflowScrolling: 'touch'
+            },
             '.easy-popup': {
                 position: 'relative',
                 display: 'inline-block',
@@ -366,7 +371,7 @@ window.EasyPopup = function() {
                     transform: 'scale3d(0.3, 0.3, 0.3)',
                     WebkitTransform: 'scale3d(0.3, 0.3, 0.3)'
                 },
-                '90%': {
+                'to': {
                     opacity: 1
                 }
             },
@@ -376,7 +381,7 @@ window.EasyPopup = function() {
                     transform: 'scale3d(0.3, 0.3, 0.3)',
                     WebkitTransform: 'scale3d(0.3, 0.3, 0.3)'
                 },
-                '90%': {
+                'to': {
                     opacity: 1
                 }
             },

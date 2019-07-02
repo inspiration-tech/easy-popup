@@ -262,6 +262,11 @@ export class EasyPopup {
                     visibility: 'visible',
                     zIndex: '10001'
                 },
+                'body .easy-popup-tint[data-id]': {
+                    // ios scroll fix
+                    WebkitOverflowScrolling: 'touch',
+                    overflowScrolling: 'touch'
+                },
                 '.easy-popup': {
                     position: 'relative',
                     display: 'inline-block',

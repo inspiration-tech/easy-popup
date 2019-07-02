@@ -47,7 +47,7 @@ html.easy-popup_overflow {
   width: 100%;
   position: fixed;
 }
-.easy-popup-tint {
+.easy-popup-tint[data-id] {
   position: fixed;
   display: none;
   width: 100%;
@@ -63,17 +63,17 @@ html.easy-popup_overflow {
   text-align: center;
   vertical-align: middle;
 }
-.easy-popup-tint::after {
+.easy-popup-tint[data-id]::after {
   display: inline-block;
   height: 100%;
   content: '';
   vertical-align: middle;
 }
-.easy-popup-tint.is_loading .easy-popup__loading {
+.easy-popup-tint[data-id].is_loading .easy-popup__loading {
   visibility: visible;
   z-index: 10001;
 }
-body .easy-popup-tint {
+body .easy-popup-tint[data-id] {
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
 }
