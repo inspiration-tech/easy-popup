@@ -1,78 +1,81 @@
-easy-popup v.3.0.2
+easy-popup v.3.0.3
 =============================
 
-Название в предыдущих версиях: *simple-popup*.   
-Простейший скрипт для работы с попапами. Также работает с CSS-стилями и HTML-шаблонами.
+Name in the previous versions: *simple-popup*.   
+Simple script for work with popups. Also works with CSS styles and HTML templates. 
 
------------
-ЗАВИСИМОСТИ
------------
-Отсутствуют.
+Read this in other languages:  
+[Russian](README.ru.md)
 
----------------------------------------
-ПОДКЛЮЧЕНИЕ В КАЧЕСТВЕ ПРОСТОГО СКРИПТА
----------------------------------------
-Подключается обычным способом через html:
+------------
+DEPENDENCIES
+------------
+None.
+
+----------------------
+USE AS A SIMPLE SCRIPT
+----------------------
+Linked to html in a regular way:
 
 ```html
 <script src='src/easy-popup.js'></script>
 ```
 
-*или*
+*or*
 
 ```html
 <script src='src/easy-popup.min.js'></script>
 ```
 
---------------------------------
-ПОДКЛЮЧЕНИЕ В КАЧЕСТВЕ JS-МОДУЛЯ
---------------------------------
+------------------
+USE AS A JS-MODULE
+------------------
 
-Чтобы подключить в качестве js-модуля, необходимо перейти в директорию проекта 
+In order to use it as a js-module, it is necessary to cd into the project directory 
 
 `cd my/project/path`
 
-и выполнить команду
+and to execute the command
 
 `npm i --save easy-popup`
 
-а затем в файле приложения выполнить импорт:
+and then to execute import in the application file:
 
 ```html
 import {EasyPopup} from 'easy-popup';
 ```
 
--------------
-ИНИЦИАЛИЗАЦИЯ
--------------
+--------------
+INITIALIZATION
+--------------
 
-Для инициализации необходимо создать экземпляр объекта EasyPopup с заданными параметрами с помощью ***new***: 
+For initialization it is necessary to create an instance of ***EasyPopup*** object with required parameters using ***new***: 
 
 ```html
 var myPopup = new EasyPopup(params);
 ```
 
-где ***params*** - объект с параметрами.
+where ***params*** is the parameter object.
 
-------------------
-ПОДКЛЮЧЕНИЕ СТИЛЕЙ
-------------------
+------------
+USING STYLES
+------------
 
-Возможно подключение стилей обычным способом и при инициализации скрипта.   
+It is possible to include styles in the regular way or at the moment of script initialization. 
 
-Обычный способ: 
+The regular way: 
 
 ```html
 <link rel="stylesheet" href='src/css/easy-popup.css'>
 ```
 
-или
+or
 
 ```html
 <link rel="stylesheet" href='src/css/easy-popup.min.css'>
 ```
 
-Альтернативный вариант - включить встроенные стили при инициализации скрипта, для этого необходимо в конструктор попапа передать два параметра:
+An alternative is to enable the built-in styles at the time of script initialization, to do this it is necessary to pass two parameters to the popup constructor:
 
 ```html
 var myPopup = new EasyPopup({
@@ -81,228 +84,228 @@ var myPopup = new EasyPopup({
 });
 ```
 
-Чтобы работали стили, эти два параметра не должны принимать значение ***false***. Следовательно, не обязательно передавать ***true***, а можно передать объект со своими пользовательскими стилями.   
+For the styles to work, these two parameters' value must not be ***false***. Therefore, it is not necessary to pass ***true***, one can pass an object with custom user styles instead.   
 
-Также возможно полностью отказаться от подключения предложенных стилей и написать все стили полностью самостоятельно.
+It is also possible to completely omit the suggested styles and write the whole styling on your own.
 
---------------------------------------------------------
-СПИСОК ПАРАМЕТРОВ, КОТОРЫЕ ПРИНИМАЕТ КОНСТРУКТОР ПОПАПА:
---------------------------------------------------------
-***Параметры принимаются в виде объекта с указанными ниже свойствами:***
+---------------------------------
+POPUP CONSTRUCTOR PARAMETER LIST:
+---------------------------------
+***Parameters are accepted as an object with the following properties:***
 
   ***styleSheetTitle*** `string`
   
-> ***title*** новой таблицы стилей (***title*** тега `style`) в DOM (используется только для проверки инициализации скрипта, далее всё пишется в уже существующую таблицу стилей). Для работы с попапами данный параметр не требуется.
+> ***title*** of the new style sheet (***title*** of the `style` tag) in DOM (used for script initialization test only, then everything is written to the existing style sheet). This parameter is not required for work with popups.
 
   ***speed*** `number`
     
-> Скорость попапа. По умолчанию установлено значение ***150***.
+> Popup speed. The default value is ***150***.
 
   ***allowBackgroundCallback*** `boolean`
   
-> Разрешить ли выполнение коллбека при клике на фон (`.easy-popup-tint`). Если коллбек разрешен, то по умолчанию клик по фону закрывает попап. Также в методе ***show*** на клик по фону можно повесить свой коллбек (***backgroundClickCallback***).
+> Allow callback execution on background click (`.easy-popup-tint`). If the callback is allowed, then by default a background click closes the popup. Also the ***show*** method allows to attach your own callback to the background click (***backgroundClickCallback***).
 
   ***allowCallbackOnEsc*** `boolean`
   
-> Разрешить ли выполнение коллбека при нажатии ***Esc***. Если коллбек разрешен, то по умолчанию нажатие ***Esc*** закрывает попап. Также в методе ***show*** на клавишу ***Esc*** можно повесить свой коллбек (***callbackOnEsc***).
+> Allow callback execution on ***Esc*** keypress. If the callback is allowed, then by default pressing ***Esc*** closes the popup. Also the ***show*** method allows to attach your own callback to ***Esc*** keypress (***callbackOnEsc***).
 
   ***allowCallbackOnEnter*** `boolean`
   
-> Разрешить ли выполнение коллбека при нажатии ***Enter***. Если коллбек разрешен, то по умолчанию нажатие ***Enter*** запускает коллбек подтверждения ***confirmBtnCallback***, при этом по умолчанию он равен пустой функции `function(){}`. Если ***confirmBtnCallback*** принимает значение *false*, - запускается коллбек закрытия (***closerCallback***). Также в методе ***show*** на клавишу ***Enter*** можно повесить свой отдельный коллбек (***callbackOnEnter***).
+> Allow callback execution on ***Enter*** keypress. If the callback is allowed, then by default pressing ***Enter*** triggers the confirmation callback ***confirmBtnCallback***, that said, it defaults to an empty function `function(){}`. If the value of ***confirmBtnCallback*** is *false*, the closing callback is triggered (***closerCallback***). Also the ***show*** method allows to attach your own callback to ***Enter*** keypress (***callbackOnEnter***).
 
   ***templates*** `object`
       
-> Объект с дополнительными шаблонами попапов, которые нужно добавить к уже имеющимся, а также с элементами, которые нужно удалить из имеющихся (например, если передано свойство ***confirm*** со значением *false*, внутри блока `.easy-popup-tint` производится поиск всех элементов `.easy-popup[data-name="confirm"]`, и все найденные элементы удаляются).
+> Object with additional popup templates, which should be added to the existing ones, as well as elements, which should be removed from the existing ones (for example, if property ***confirm*** is passed with value *false*, inside the `.easy-popup-tint` block search for all `.easy-popup[data-name="confirm"]` elements is executed, and all found elements are removed).
 
 
   ***styles*** `object`
     
-> Объект с кастомизированными стилями для попапов, которые перезапишут/дополнят дефолтные стили (если передано значение *false*, то стили из js-скрипта не применяются, включая медиазапросы, по умолчанию установлено в *false*, т.е. дефолтные стили, заданные в скрипте, не применяются). Вместо работы со стилями через js возможно подключить css-файл (см. папку css).
+> Object with custom popup styles, which will overwrite/add to the default styles (if *false* is passed as the value, then the styles from the js script are not accepted, including media queries, by default it is set to *false*, i.e. the default styles defined in the script are not applied). Instead of work with styles via js it is possible to include a css file (see folder *css*).
 
   ***mediaStyles*** `object`
     
-> Объект с кастомизированными медиазапросами (структура аналогична объекту ***styles***, только тут каждый такой объект дополнительно оборачивается в строку медиазапроса), для обработки медиазапросов ***styles*** не должен быть равен *false*. Если ***mediaStyles*** равен *false*, медиазапросы из js-скрипта не применяются. По умолчанию принимает значение *false*.
+> Object with custom media queries (the structure is equivalent to object ***styles***, but here each of such objects is additionally wrapped with a media query string), for media queries to be processed ***styles*** must not be set to *false*. If ***mediaStyles*** is set to *false*, the media queries from the js script are not applied. By default it is set to *false*.
 
   ***replaceStyles*** `boolean`
     
-> По умолчанию свойства объекта каждого селектора в переданных параметрах дополняют свойства соответствующего объекта в стилях по умолчанию, т.е. учитываются и те, которые заданы по умолчанию, и переданные в параметрах. Если ***replaceStyles*** установлен в *true*, то объект стилей по умолчанию (для каждого селектора) полностью перезаписывается на тот, который был передан в параметрах, даже если там всего одно свойство, или вообще их нет.
+> By default the properties of each selector object in the passed parameters are added to the corresponding property object in the default styles, i.e. both default and passed ones are recognized. If ***replaceStyles*** is set to *true*, then the default style object (for each selector) is completely overwritten to that passed in the parameters, even if it has only one property, or no properties at all.
 
   ***minLoadingTime*** `number`
     
-> Минимальное время, в течение которого должна отображаться анимация (или картинка) загрузки при использовании метода ***setLoading***.
+> Minimal time during which the loading animation (or image) should be displayed when using the ***setLoading*** method.
 
   ***loadingPic*** `string`
     
-> URL анимации или картинки, которая должна отображаться в качестве индикатора загрузки при использовании метода ***setLoading***. Поддерживается передача строки в виде *base64*. По умолчанию отображаются маленькие песочные часы в целях компактности. Если требуется полноценная анимированная картинка, можно поставить свою, либо подключить картинку `loading.gif` из папки *src/img*.
+> URL of the animation or image that should be displayed as a loading indicator when using the ***setLoading*** method. Passing a string in *base64* is supported. By default a small sand glass is displayed for file size reasons. If there is a need in a fully functional animated image, you can set your own one, or use the `loading.gif` image from the *src/img* folder.
 
   ***appendTo*** `string | false`
     
-> Селектор, в который будет вставлен html-код скрипта. Формат написания селектора стандартный, как в css. Если передано *false*, то html-код скрипта будет вставлен в селектор по умолчанию.
+> Selector to which the script html code will be appended. The format for writing the selector is standard, the same as in css. If *false* is passed, then the script html code will be appended to the default selector.
 
   ***noScrollTop*** `boolean`
     
-> Запретить автопрокрутку (скроллинг) попапов с помощью метода ***scrollTop***. Также данный параметр (если равен *true*) отключает присвоение элементам css-класса ***easy-popup_overflow***.
+> Forbid popup auto scrolling using the ***scrollTop*** method. Also this parameter (if set to *true*) disables adding the ***easy-popup_overflow*** css class to elements.
 
   ***defaultAnimationShow*** `string`
     
-> Название css-анимации (заданной с помощью @keyframes), используемой по умолчанию при открытии попапа. Если данный параметр не передан, по умолчанию используется встроенная анимация ***easyPopupShow***.
+> Name of the css animation (as defined in @keyframes), used by default during popup opening. If this parameter is not passed, the built-in animation ***easyPopupShow*** is used by default.
 
   ***defaultAnimationClose*** `string`
     
-> Название css-анимации (заданной с помощью @keyframes), используемой по умолчанию при открытии попапа. Если данный параметр не передан, по умолчанию используется встроенная анимация ***easyPopupClose***.
+> Name of the css animation (as defined in @keyframes), used by default during popup closing. If this parameter is not passed, the built-in animation ***easyPopupClose*** is used by default.
 
   ***id*** `string`
     
-> Уникальный идентификатор объекта попапа, присваиваемый элементу `.easy-popup-tint` с помощью дата-атрибута ***data-id***. По умолчанию в качестве идентификатора генерируется и присваевается случайная строка (от даты и рандомного числа). Данный атрибует присваивается каждый раз при создании нового экземпляра попапа (за исключением случаев, когда в целевом родительском элементе (***appendTo***) уже существует элемент `.easy-popup-tint` с атрибутом ***data-id***). В случае когда в целевом родительском элементе уже существует элемент `.easy-popup-tint` с атрибутом ***data-id***, значение этого ***data-id*** присваевается объекту попапа в качестве ***id*** (т.е. свойство объекта попапа перезаписывается из дата-атрибута).
+> Unique popup object identifier assigned to the `.easy-popup-tint` element by means of the ***data-id*** data attribute. By default a random string (from the date and a random number) is generated and assigned as the identifier. This attribute is assigned each time when creating a new popup instance (except for the cases when the target parent element (***appendTo***) already has the `.easy-popup-tint` element with the ***data-id*** attribute). In case the target parent element already has the `.easy-popup-tint` element with the ***data-id*** attribute, the value of this ***data-id*** is assigned to the popup object as its ***id*** (i.e. the popup object property is overwritten from tha data attribute).
 
-----------------
-ОСНОВНЫЕ МЕТОДЫ:
-----------------
+--------------
+BASIC METHODS:
+--------------
 
-### show (показать попап):
+### show (shows the popup):
 
-***Так же как и в конструкторе попапа, параметры принимаются в виде объекта. Свойства объекта описаны ниже:***
+***As in the case with the popup constructor the parameters are accepted as an object. The object properties are as follows:***
 
   ***title*** `string`
   
-> Заголовок попапа.
+> Popup title (heading).
 
   ***text*** `string`
   
-> Текст попапа.
+> Popup text.
 
   ***btnEvents*** `boolean`
   
-> Включить/отключить события при клике на кнопки `.closing_button` и `.confirm_button`.
+> Enable/disable events when clicking buttons `.closing_button` and `.confirm_button`.
 
   ***name*** `string`
   
-> Имя попапа, который вызывается (атрибут ***data-name***). По умолчанию - ***message***.
+> Name of the popup being called (***data-name*** attribute). It defaults to ***message***.
 
   ***html*** `string`
   
-> Применить HTML-шаблон, если он передан (при этом игнорируются параметры ***title***, ***text*** и ***name***).
+> Apply an HTML template if passed (in this case parameters ***title***, ***text*** and ***name*** are ignored).
 
   ***closerCallback*** `function | object`
   
-> Callback, который вызывается при нажатии на `.closer`. Если является объектом, то принимается два свойства: `closerOff` (если нужно отключить закрытие попапа - установить в `true`) и `callback` (непосредственно передаваемый callback, который будет вызываться при закрытии)
+> Callback triggered when clicking on `.closer`. If it is an object then two properties are accepted: `closerOff` (if you need to disable popup auto closing set this to `true`) and `callback` (the passed callback itself that will be triggered when closing)
 
   ***closingBtnCallback*** `function`
   
-> Если на `.closing_button` нужно повесить отдельный callback - передать сюда (если передан - заменит дефолтный).
+> If you need to attach a separate callback to `.closing_button` - pass it here (if passed, it will replace the default one).
 
   ***confirmBtnCallback*** `function`
   
-> Если на `.confirm_button` нужно повесить отдельный callback - передать сюда (если передан - заменит дефолтный).
+> If you need to attach a separate callback to `.confirm_button` - pass it here (if passed, it will replace the default one).
 
   ***backgroundClickCallback*** `function`
   
-> Если при клике на `.tint` (фон) нужен отдельный callback - передать сюда.
+> If you need a separate callback for the click on `.tint` (background) - pass it here.
 
   ***callbackOnEsc*** `function`
   
-> Если при нажатии ***Esc*** нужен отдельный callback - передать сюда.
+> If you need a separate callback for ***Esc*** keypress - pass it here.
 
   ***callbackOnEnter*** `function`
   
-> Если при нажатии ***Enter*** нужен отдельный callback - передать сюда.
+> If you need a separate callback for ***Enter*** keypress - pass it here.
 
   ***closingBtnText*** `string`
   
-> Задать свой текст для кнопки закрытия `.closing_button` (принимает HTML).
+> Set you own text for the closing button `.closing_button` (accepts HTML).
 
   ***confirmBtnText*** `string`
   
-> Задать свой текст для кнопки подтверждения `.confirm_button` (принимает HTML).
+> Set you own text for the confirmation button `.confirm_button` (accepts HTML).
 
   ***animationShow*** `string`
   
-> Название css-анимации (заданной с помощью @keyframes), используемой для открытия данного конкретного попапа, т.е. однократно. Если данный параметр не передан, используется анимация для открытия попапа по умолчанию.
+> Name of the css animation (as defined in @keyframes) used for opening this specific popup, i.e. once only. If this parameter is not passed the default popup opening animation is used.
 
   ***animationClose*** `string`
   
-> Название css-анимации (заданной с помощью @keyframes), используемой для анимации закрытия ранее открытого попапа, т.е. однократно. Пояснение: если текущий попап вызывается при ранее открытых, но ещё не закрытых попапах, то происходит замена старого попапа на текущий, при этом старый будет закрываться с анимацией, переданной в данный параметр. Если данный параметр не передан, используется анимация для закрытия попапа по умолчанию.
+> Name of the css animation (as defined in @keyframes) used for animation of the previously opened popup, i.e. once only. Comment: if the current popup is called when having previously opened but yet not closed ones, then the old popup is replaced with the current one, and in this case the old one will be closed with the animation passed to this parameter. If this parameter is not passed the default popup closing animation is used.
 
 -----------------------------------
-### close (закрыть попап):
+### close (closes the popup):
 
-***Параметры принимаются в виде объекта. Свойства объекта описаны ниже:***
+***The parameters are accepted as an object. The object properties are as follows:***
 
 ***callback*** `function`
   
-> Callback, который выполнится перед закрытием попапа.
+> Callback to be executed before popup closing.
 
 ***stopAfterCallback*** `boolean`
   
-> Если имеет значение *true*, скрипт прерывается после вызова коллбека. Если не передан - по умолчанию после вызова коллбека попап закрывается.
+> If set to *true* the script is stopped after triggering the callback. If not passed, then by default the popup will close after triggering the callback.
 
 ***animationClose*** `string`
   
-> Название css-анимации (заданной с помощью @keyframes), используемой для закрытия данного конкретного попапа, т.е. однократно. Если данный параметр не передан, используется анимация для закрытия попапа по умолчанию.
+> Name of the css animation (as defined in @keyframes) used for closing this specific popup, i.e. once only. If this parameter is not passed the default popup closing animation is used.
 
 -----------------------------------
-### setLoading (показать полноэкранный индикатор загрузки поверх всего остального контента):
+### setLoading (shows a fullscreen loading indicator above all other contents):
 
-***Принимается два параметра:***
+***Two parameters are accepted:***
 
   `number`
   
-> Минимальное время, в течение которого должна отображаться анимация (или картинка) загрузки.
+> Minimal time during which the loading animation (or image) should be displayed.
 
   `string`
   
-> URL анимации или картинки, которая должна отображаться в качестве индикатора загрузки. Поддерживается передача строки в виде *base64*.
+> URL of the animation or image that should be displayed as a loading indicator. Passing a string in *base64* is supported.
 
 -----------------------------------
-### unsetLoading (скрывает индикатор загрузки, вызванный методом setLoading):
+### unsetLoading (hides the loading indicator displayed by the "setLoading" method):
 
-***Используется без передачи параметров***
+***Used without passing parameters***
 
--------------
-ПРИМЕР ВЫЗОВА
--------------
-См. пример использования в файле ***example.js***.
+-----------
+USE EXAMPLE
+-----------
+For an example of popup use see folder ***test***.
 
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 1.3
--------------
-1) Убрана автоматическая инициализация
-2) Поправлены мелкие баги со стилями
-3) styles и mediaStyles теперь по умолчанию равны false
-4) добавлена папка с дефолтными CSS-стилями (подключать не обязательно)
-5) добавлен файл .json для composer
-
-
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 1.3.1
--------------
-1) Исправлено обращение к элементу .tint на body>.tint
-2) объект Popup перенесён в область видимости window
-
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 1.3.2
--------------
-1) Изменён параметр по умолчанию для ***closingBtnText*** (в попапе `confirm` теперь равен **'Отклонить'**, в попапе `message` равен **'OK'**, в остальных случаях равен ***false***). Параметр по умолчанию срабатывает только для двух указанных попапов, в том числе - если передано ***false*** (по строгому сравнению).
-2) Изменён параметр по умолчанию для ***confirmBtnText*** (в попапе `confirm` теперь равен **'Подтвердить'**). Параметр по умолчанию срабатывает только для указанного попапа, в том числе - если передано ***false*** (по строгому сравнению).
-
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 1.3.3
--------------
-Исправлен баг со скроллом после открытия попапа.
-
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 1.3.4
--------------
-1) Класс ***h_overflow***, используемый при динамическом создании css-стилей через js, также внесён в css-файлы.
-2) К объекту ***Popup*** добавлено свойство ***isActive***, равное *true*, если какой-либо попап открыт, и равное *false* - если нет.
-3) Последнее положение скролла запоминается только если попап закрыт, а если открыт - используется сохранённое значение.
+----------------------
+CHANGES IN VERSION 1.3
+----------------------
+1) Automatic initialization was removed
+2) Minor style bugs fixed
+3) Now styles and mediaStyles default to false
+4) A folder with default CSS styles was added (not necessary to use)
+5) The composer.json file was added
 
 
+------------------------
+CHANGES IN VERSION 1.3.1
+------------------------
+1) Addressing the .tint element was changed to body>.tint
+2) The Popup object was moved to the window scope.
 
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 2.0.0
--------------
-1) Изменены основные CSS-классы попапа:
+------------------------
+CHANGES IN VERSION 1.3.2
+------------------------
+1) The ***closingBtnText*** default parameter was changed (in the `confirm` popup it is now set to **'Отклонить'**, and in the `message` popup it is **'OK'**, in other cases it it set to ***false***). The default parameter works for the two indicated popups only, including the case if ***false*** is passed (by strict comparison).
+2) The ***confirmBtnText*** default parameter was changed (in the `confirm` popup it is now set to **'Подтвердить'**). The default parameter works for the indicated popup only, including the case if ***false*** is passed (by strict comparison).
+
+------------------------
+CHANGES IN VERSION 1.3.3
+------------------------
+A scrolling bug after popup opening was fixed
+
+------------------------
+CHANGES IN VERSION 1.3.4
+------------------------
+1) The ***h_overflow*** class used when dynamically creating css styles via js was also added to the css files.
+2) The ***isActive*** property was added to the ***Popup*** object, it is set to *true* if a popup is open, and *false* if not.
+3) The last scroll position is stored only if the popup is closed, and if it is open the stored value is used.
+
+
+
+------------------------
+CHANGES IN VERSION 2.0.0
+------------------------
+1) Main popup CSS classes were renamed:
 
     `.tint` -> `.simple-popup-tint`
     
@@ -318,44 +321,44 @@ var myPopup = new EasyPopup({
     
     `.h_overflow` -> `.simple-popup_overflow`
     
-2) Добавлены методы ***setLoading*** и ***unsetLoading***, отвечающие за отображение/скрытие полноэкранного индикатора загрузки (подробное описание см. выше в списке методов).
-3) В конструктор попапа добавлен параметр ***minLoadingTime***, обозначающий минимальное время, в течение которого должна отображаться анимация загрузки, а также параметр ***loadingPic*** - URL картинки, которая будет использоваться в качестве индикатора загрузки.
-4) Объект попапа переименован из ***Popup*** в ***EasyPopup***.
-5) Все методы объекта ***EasyPopup*** теперь возвращают сам этот объект.
-6) Свойство ***scrollTop*** удалено из конструктора, т.к. оно должно меняться только специальными обработчиками.
+2) Methods ***setLoading*** and ***unsetLoading*** were added, used to show/hide the fullscreen loading indicator (see detailed description above in the method list).
+3) The ***minLoadingTime*** parameter was added to the popup constructor, used to set the minimal time during which the loading animation (or image) should be displayed, and also the ***loadingPic*** parameter which is the URL of the image that will be used as the loading indicator.
+4) The popup object was renamed from ***Popup*** to ***SimplePopup***.
+5) All methods of the ***SimplePopup*** object now return this very object.
+6) The ***scrollTop*** property was removed from the constructor as it must be modified by special handlers only.
 
 
 
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 2.0.1
--------------
-Класс ***simple-popup_overflow*** не проставляется для устройств с ios
+------------------------
+CHANGES IN VERSION 2.0.1
+------------------------
+The ***simple-popup_overflow*** class is now not assigned when using ios devices
 
 
 
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 2.1.0
--------------
-В методе ***show*** теперь можно передавать параметр ***name*** со значением *false*, в таком случае не будет активного окна попапа (полезно, например, при использовании метода ***setLoading***).
+------------------------
+CHANGES IN VERSION 2.1.0
+------------------------
+It is now possible to pass the ***name*** parameter as *false* in the ***show*** method, in this case there will be no active popup container (for example, it is useful when using the ***setLoading*** method).
 
 
 
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 2.2.0
--------------
-1) В конструктор добавлен параметр ***appendTo***, обозначающий селектор, в который будет вставлен html-код скрипта.
-2) В конструктор добавлен параметр ***noScrollTop***, запрещающий автопрокрутку (скроллинг) попапов.
+------------------------
+CHANGES IN VERSION 2.2.0
+------------------------
+1) The ***appendTo*** parameter was added to the constructor, accepting the selector to append the script html code to.
+2) The ***noScrollTop*** parameter was added to the constructor, forbidding popup auto scrolling.
 
 
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 3.0.0
--------------
-1) Пакет переименован из ***simple-popup*** в ***easy-popup***, т.к. на момент публикации имя ***simple-popup*** уже занято в ***npm***. Соответственно, изменено имя объекта попапа c ***SimplePopup*** на ***EasyPopup***, а также изменены приставки в css-классах с ***simple-popup*** на ***easy-popup***.
-2) ***jQuery*** исключён из списка зависимостей. В скрипте теперь используется только нативный js.
-3) Изменён принцип анимации. Теперь используется анимация на базе css (***@keyframes***). Скрипт содержит анимацию по умолчанию, но также принимает пользовательские анимации. Анимация по умолчанию может быть изменена через конструктор, но также возможно передавать анимации для отдельных операций открытия/закрытия в методы ***show*** и ***close***. Подробности вызова см. выше.
-4) Добавлена поддержка подключения скрипта в качестве модуля (подробности подключения см. выше).
-5) Исправлены коллбеки, выполняющиеся при событиях.
-6) Переименованы три метода конструктора в соответствии со своим смысловым назначением:
+------------------------
+CHANGES IN VERSION 3.0.0
+------------------------
+1) The package was renamed from ***simple-popup*** to ***easy-popup*** as at the moment of publication the name ***simple-popup*** was already taken in ***npm***. Respectively, the popup object name was changed from ***SimplePopup*** to ***EasyPopup***, and also the prefixes in the css classes were changed from ***simple-popup*** to ***easy-popup***.
+2) ***jQuery*** was removed from the list of dependencies. Only native js is used in the script now.
+3) The animation principle changed. Now css-based animation is used (***@keyframes***). The script contains a default animation, but also accepts user animations. The default animation can be changed in the constructor, but also it is possible to pass animations for specific opening/closing operations to the ***show*** and ***close*** methods. See details for its use above.
+4) Module-based script import support was added (see import details above).
+5) Event callbacks fixed.
+6) Three constructor methods renamed according to their semantically intended purpose:
 
     `closeOnBackgroundClick` -> `allowBackgroundCallback`
     
@@ -363,16 +366,21 @@ var myPopup = new EasyPopup({
     
     `confirmOnEnter` -> `allowCallbackOnEnter`
     
-7) Элементу `.easy-popup-tint` (ранее `.simple-popup-tint`) теперь присваивается атрибут ***data-id***, содержащий уникальный идентификатор объекта попапа. Данный атрибут присваивается каждый раз при создании нового экземпляра попапа (за исключением случаев, когда в целевом родительском элементе (***appendTo***) уже существует элемент `.easy-popup-tint` с атрибутом ***data-id***). В конструктор добавлен параметр ***id***, позволяющий задать идентификатор вручную. Если данный параметр не передан, по умолчанию генерируется случайный идентификатор.
-8) Картинка загрузки по умолчанию (***loadingPic***) заменена на более компактную в целях оптимизации. Если требуется подключить предыдущую, можно сделать это через параметры. Старая картинка находится в папке *img* (`loading.gif`).
+7) The `.easy-popup-tint` element (previously `.simple-popup-tint`) is now given the ***data-id*** attribute containing the unique popup object identifier. This attribute is assigned each time when creating a new popup instance (except for the cases when the target parent element (***appendTo***) already has the `.easy-popup-tint` element with the ***data-id*** attribute). The ***id*** parameter was added to the constructor which allows to set the identifier manually. If this parameter is not passed, then by default a random identifier is generated.
+8) The default loading picture (***loadingPic***) was replaced with a more lightweight one for optimization purposes. If you need to use the previous one, it can be done in the parameters. The old picture is in the *img* folder (`loading.gif`).
 
 
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 3.0.1
--------------
-Исправлен баг стилей для ois при прокрутке попапа. (Ранее при прокрутке за инпут попап не прокручивался.) 
+------------------------
+CHANGES IN VERSION 3.0.1
+------------------------
+IOS styling bug during the popup scroll was fixed. (Previously the popup did not scroll when touching on inputs.) 
 
--------------
-ИЗМЕНЕНИЯ В ВЕРСИИ 3.0.2
--------------
-Исправлен мелкий баг соответствия стилей в скрипте и файлах стилей.
+------------------------
+CHANGES IN VERSION 3.0.2
+------------------------
+A minor bug of script style correspondence to the css file styles was fixed.
+
+------------------------
+CHANGES IN VERSION 3.0.3
+------------------------
+The English version of *README* was added.
