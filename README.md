@@ -1,4 +1,4 @@
-easy-popup v.3.0.3
+easy-popup v.3.0.4
 =============================
 
 Name in the previous versions: *simple-popup*.   
@@ -44,6 +44,33 @@ and then to execute import in the application file:
 ```html
 import {EasyPopup} from 'easy-popup';
 ```
+
+---------------------------
+INSTALLATION USING COMPOSER
+---------------------------
+
+At the moment the package is not in Composer. But still it is possible to require it as an npm asset. To install the package in this way Composer Packagist can be used. To use Packagist add the following entry to your ***composer.json*** file:
+
+```html
+"repositories":[
+    {
+        "type": "composer",
+        "url": "https://asset-packagist.org"
+    }
+],
+```
+
+Then you only need to ***require*** the package as follows (indicate the required version, if necessary):
+
+```html
+"require": {
+    "npm-asset/easy-popup": "^3.0.3" 
+},
+```
+
+If the required version fails to install, it is necessary to update the npm package information [in Packagist](https://asset-packagist.org/package/npm-asset/easy-popup).
+
+For installation to a custom path see [these instructions](https://asset-packagist.org/site/about).
 
 --------------
 INITIALIZATION
@@ -384,3 +411,8 @@ A minor bug of script style correspondence to the css file styles was fixed.
 CHANGES IN VERSION 3.0.3
 ------------------------
 The English version of *README* was added.
+
+------------------------
+CHANGES IN VERSION 3.0.4
+------------------------
+Information on composer installation was added, the package was also updated for use as an npm-asset in Composer.
