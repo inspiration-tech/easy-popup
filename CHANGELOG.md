@@ -5,10 +5,13 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.0.5] - 2019-07-06
+### Added
+- CHANGELOG.md was added. All version change descriptions were moved from README.md to CHANGELOG.md.
+
 ## [3.0.4] - 2019-07-06
 ### Added
 - Information on composer installation was added, the package was also updated for use as an npm-asset in Composer.
-- CHANGELOG.md was added. All version change descriptions were moved from README.md to CHANGELOG.md.
 
 ## [3.0.3] - 2019-07-06
 ### Added
