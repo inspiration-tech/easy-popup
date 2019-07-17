@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.0.6] - 2019-07-17
+### Changed
+- The ***data-id*** attribute of the `.easy-popup-tint` element removed from the styles.
+
 ## [3.0.5] - 2019-07-06
 ### Added
 - CHANGELOG.md was added. All version change descriptions were moved from README.md to CHANGELOG.md.

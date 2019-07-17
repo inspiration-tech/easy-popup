@@ -225,7 +225,7 @@ export class EasyPopup {
             * */
 
             var scriptStyles = {
-                '.easy-popup-tint[data-id]': {
+                '.easy-popup-tint': {
                     position: 'fixed',
                     display: 'none',
                     width: '100%',
@@ -241,7 +241,7 @@ export class EasyPopup {
                     textAlign: 'center',
                     verticalAlign: 'middle'
                 },
-                '.easy-popup-tint[data-id]::after': {
+                '.easy-popup-tint::after': {
                     display: 'inline-block',
                     height: '100%',
                     content: '',
@@ -258,11 +258,11 @@ export class EasyPopup {
                     transition: 'all 150ms',
                     background: 'url('+this.defaultLoadingPic+') center center / 50px no-repeat rgba(255, 255, 255, 0.7)'
                 },
-                '.easy-popup-tint[data-id].is_loading .easy-popup__loading': {
+                '.easy-popup-tint.is_loading .easy-popup__loading': {
                     visibility: 'visible',
                     zIndex: '10001'
                 },
-                'body .easy-popup-tint[data-id]': {
+                'body .easy-popup-tint': {
                     // ios scroll fix
                     WebkitOverflowScrolling: 'touch',
                     overflowScrolling: 'touch'
