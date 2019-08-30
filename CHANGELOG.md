@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.0.7] - 2019-08-30
+### Changed
+- Fixed the bug with the ***minLoadingTime*** parameter. Now it can be set to ***0*** without additional timeout.
+- The ***unsetLoading*** method does not return *false* anymore, but returns the popup object instead.
+- ***Babel Polyfill*** moved from ***optionalDependencies*** to ***devDependencies***.
+
 ## [3.0.6] - 2019-07-17
 ### Changed
 - The ***data-id*** attribute of the `.easy-popup-tint` element removed from the styles.

@@ -877,8 +877,7 @@ window.EasyPopup = function() {
         // получаем минимальное время загрузки
         var minLoadingTime = arguments.length && arguments[0] !== false && arguments[0] !== null ? arguments[0] : Math.max(this.minLoadingTime, this.speed);
 
-        // установить таймаут - минимальное время, в течение которого должна отображаться анимация загрузки
-        this.delayedLoading = setTimeout(function(){
+        var setLoadingCallback = function(){
             // после запуска скрипта таймаута сразу почистить переменную (prevent duplicate calls)
             Popup.delayedLoading = null;
 
@@ -887,7 +886,16 @@ window.EasyPopup = function() {
                 Popup.closeAfterDelay = false;
                 Popup.unsetLoading();
             }
-        }, minLoadingTime);
+        };
+
+        if (minLoadingTime) {
+            // установить таймаут - минимальное время, в течение которого должна отображаться анимация загрузки
+            this.delayedLoading = setTimeout(function(){
+                setLoadingCallback();
+            }, minLoadingTime);
+        } else {
+            setLoadingCallback();
+        }
 
         return this;
     };
@@ -895,7 +903,7 @@ window.EasyPopup = function() {
         // если запущен таймаут, то по истечении этого таймаута нужно спрятать индикатор загрузки
         if (Popup.delayedLoading) {
             Popup.closeAfterDelay = true;
-            return false;
+            return this;
         }
 
         // таймаут не установлен, - значит снять класс загрузки
