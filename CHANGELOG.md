@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.1.0] - 2019-09-02
+### Added
+- Showing and closing speed parameters added to the ***show*** and ***close*** methods (see the ***speed*** and ***closingSpeed*** parameters in the ***show*** method, and the ***speed*** parameter in the ***close*** method).
+
 ## [3.0.7] - 2019-08-30
 ### Changed
 - Fixed the bug with the ***minLoadingTime*** parameter. Now it can be set to ***0*** without additional timeout.

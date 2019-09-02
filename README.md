@@ -1,4 +1,4 @@
-easy-popup v.3.0.7
+easy-popup v.3.1.0
 =============================
 
 Name in the previous versions: *simple-popup*.   
@@ -253,6 +253,14 @@ BASIC METHODS:
   
 > Name of the css animation (as defined in @keyframes) used for animation of the previously opened popup, i.e. once only. Comment: if the current popup is called when having previously opened but yet not closed ones, then the old popup is replaced with the current one, and in this case the old one will be closed with the animation passed to this parameter. If this parameter is not passed the default popup closing animation is used.
 
+***speed*** `number`
+  
+> Popup opening speed. It defaults to *false*. In case it is set to *false* the popup object speed property is used instead.
+
+***closingSpeed*** `number`
+  
+> Closing speed of the previously opened popup. It defaults to *false*. In case it is set to *false* the popup object speed property is used instead.
+
 -----------------------------------
 ### close (closes the popup):
 
@@ -269,6 +277,10 @@ BASIC METHODS:
 ***animationClose*** `string`
   
 > Name of the css animation (as defined in @keyframes) used for closing this specific popup, i.e. once only. If this parameter is not passed the default popup closing animation is used.
+
+***speed*** `number`
+  
+> Popup closing speed. It defaults to *false*. In case it is set to *false* the popup object speed property is used instead.
 
 -----------------------------------
 ### setLoading (shows a fullscreen loading indicator above all other contents):

@@ -552,11 +552,15 @@ export class EasyPopup {
                 showParams[prop] = params[prop];
         }
 
+        // если заданы параметры скорости показа или закрытия попапа - используем их, иначе используем скорость попапа, указанную в объекте по умолчанию
+        let closeSpeed = showParams.closingSpeed !== false ? showParams.closingSpeed : this.speed,
+            showSpeed = showParams.speed !== false ? showParams.speed : this.speed;
+
         // смотрим, есть ли уже открытые (активные) попапы
         var activePopups = document.querySelectorAll('.easy-popup.active');
         if (activePopups.length){
             var animationNameOut = showParams.animationClose && typeof showParams.animationClose === 'string' ? showParams.animationClose : this.defaultAnimationClose,
-                animationStringOut = this.speed + 'ms ' + animationNameOut + ' 1 linear';
+                animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
 
             Array.prototype.forEach.call(activePopups, (node)=>{
                 this.localFunctions.removeClass(node, 'active');
@@ -564,13 +568,18 @@ export class EasyPopup {
                 node.style.animation = animationStringOut;
             });
 
-            setTimeout(()=>{
+            let displayNoneCallback = ()=>{
                 // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
                 Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
                     node.style.display = 'none';
                 });
                 this.show(showParams);
-            },this.speed);
+            };
+
+            if (closeSpeed)
+                setTimeout(displayNoneCallback, closeSpeed);
+            else
+                displayNoneCallback();
 
             return this;
         }
@@ -662,7 +671,7 @@ export class EasyPopup {
             this.localFunctions.addClass(elem,'active');
 
             var animationNameIn = showParams.animationShow && typeof showParams.animationShow === 'string' ? showParams.animationShow : this.defaultAnimationShow,
-                animationStringIn = this.speed + 'ms ' + animationNameIn + ' 1 linear';
+                animationStringIn = showSpeed + 'ms ' + animationNameIn + ' 1 linear';
 
             elem.style.WebkitAnimation = animationStringIn;
             elem.style.animation = animationStringIn;
@@ -746,7 +755,7 @@ export class EasyPopup {
         }
 
         this.actionState = true;
-        setTimeout(()=>{
+        let showCompletedCallback = ()=>{
             this.actionState = false;
 
             // если включено закрытие попапа при нажатии Esc или подтверждение при нажатии Enter // запускать только по таймауту, иначе глюк события - отключается раньше полного появления попапа, при этом метод close блокируется, т.к. открытие попапа ещё не завершилось =)
@@ -787,7 +796,12 @@ export class EasyPopup {
                 };
                 document.addEventListener('keydown', this.keydownCallbackEnter);
             }
-        },this.speed);
+        };
+
+        if (showSpeed)
+            setTimeout(showCompletedCallback, showSpeed);
+        else
+            showCompletedCallback();
 
         return this;
     }
@@ -802,11 +816,13 @@ export class EasyPopup {
         callback: function (callback, который выполнится перед закрытием),
         stopAfterCallback: boolean (если имеет значение true, скрипт прерывается после вызова коллбека),
         animationClose: string (имя анимации, которую применить при закрытии попапа)
+        closeSpeed: number (скорость анимации закрытия)
         */
         var closeParams = {
                 callback: false,
                 stopAfterCallback: false,
-                animationClose: false
+                animationClose: false,
+                speed: false
             };
 
         for (var prop in closeParams) {
@@ -824,10 +840,13 @@ export class EasyPopup {
         if (closeParams.stopAfterCallback === true)
             return this;
 
+        // если задан параметр скорости закрытия попапа - используем его, иначе используем скорость попапа, указанную в объекте по умолчанию
+        var closeSpeed = closeParams.speed !== false ? closeParams.speed : this.speed;
+
         var activePopups = document.querySelectorAll('.easy-popup.active');
         if (activePopups.length){
             var animationNameOut = closeParams.animationClose && typeof closeParams.animationClose === 'string' ? closeParams.animationClose : this.defaultAnimationClose,
-                animationStringOut = this.speed + 'ms ' + animationNameOut + ' 1 linear';
+                animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
 
             Array.prototype.forEach.call(activePopups, (node)=>{
                 this.localFunctions.removeClass(node, 'active');
@@ -835,12 +854,17 @@ export class EasyPopup {
                 node.style.animation = animationStringOut;
             });
 
-            setTimeout(()=>{
-                // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
+            var displayNoneCallback = ()=>{
+                // всем попапам ставим display none
                 Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
                     node.style.display = 'none';
                 });
-            },this.speed);
+            };
+
+            if (closeSpeed)
+                setTimeout(displayNoneCallback, closeSpeed);
+            else
+                displayNoneCallback();
         }
         // если не отключена автопрокрутка
         if (!this.noScrollTop) {
@@ -852,8 +876,7 @@ export class EasyPopup {
             scrollingElement.scrollTop = this.scrollTop;
         }
 
-        this.actionState = true;
-        setTimeout(()=>{
+        let closeCompleteCallback = ()=>{
             //$('html, body').stop(true);
             var tint = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
             tint.style.display = 'none';
@@ -865,7 +888,14 @@ export class EasyPopup {
                 delete window.a3e95e180cc04c9d85ffdd8ebecef047;
             }
             this.actionState = false;
-        },this.speed);
+        };
+
+        this.actionState = true;
+
+        if (closeSpeed)
+            setTimeout(closeCompleteCallback, closeSpeed);
+        else
+            closeCompleteCallback();
 
         return this;
     }
@@ -895,14 +925,11 @@ export class EasyPopup {
             }
         };
 
-        if (minLoadingTime) {
+        if (minLoadingTime)
             // установить таймаут - минимальное время, в течение которого должна отображаться анимация загрузки
-            this.delayedLoading = setTimeout(function(){
-                setLoadingCallback();
-            }, minLoadingTime);
-        } else {
+            this.delayedLoading = setTimeout(setLoadingCallback, minLoadingTime);
+        else
             setLoadingCallback();
-        }
 
         return this;
     }

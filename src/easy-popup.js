@@ -534,7 +534,9 @@ window.EasyPopup = function() {
                 closingBtnText: false,
                 confirmBtnText: false,
                 animationShow: false,
-                animationClose: false
+                animationClose: false,
+                speed: false,
+                closingSpeed: false
             },
             arguments = arguments.length ? arguments[0] : {},
             scrollingElement = document.scrollingElement || document.documentElement, // элемент, отвечающий за прокрутку документа
@@ -548,11 +550,15 @@ window.EasyPopup = function() {
                 showParams[prop] = arguments[prop];
         }
 
+        // если заданы параметры скорости показа или закрытия попапа - используем их, иначе используем скорость попапа, указанную в объекте по умолчанию
+        var closeSpeed = showParams.closingSpeed !== false ? showParams.closingSpeed : this.speed,
+            showSpeed = showParams.speed !== false ? showParams.speed : this.speed;
+
         // смотрим, есть ли уже открытые (активные) попапы
         var activePopups = document.querySelectorAll('.easy-popup.active');
         if (activePopups.length){
             var animationNameOut = showParams.animationClose && typeof showParams.animationClose === 'string' ? showParams.animationClose : this.defaultAnimationClose,
-                animationStringOut = this.speed + 'ms ' + animationNameOut + ' 1 linear';
+                animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
 
             Array.prototype.forEach.call(activePopups, function(node){
                 localFunctions.removeClass(node, 'active');
@@ -560,13 +566,18 @@ window.EasyPopup = function() {
                 node.style.animation = animationStringOut;
             });
 
-            setTimeout(function(){
+            var displayNoneCallback = function(){
                 // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
                 Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
                     node.style.display = 'none';
                 });
                 Popup.show(showParams);
-            },this.speed);
+            };
+
+            if (closeSpeed)
+                setTimeout(displayNoneCallback, closeSpeed);
+            else
+                displayNoneCallback();
 
             return this;
         }
@@ -658,7 +669,7 @@ window.EasyPopup = function() {
             localFunctions.addClass(elem,'active');
 
             var animationNameIn = showParams.animationShow && typeof showParams.animationShow === 'string' ? showParams.animationShow : this.defaultAnimationShow,
-                animationStringIn = this.speed + 'ms ' + animationNameIn + ' 1 linear';
+                animationStringIn = showSpeed + 'ms ' + animationNameIn + ' 1 linear';
 
             elem.style.WebkitAnimation = animationStringIn;
             elem.style.animation = animationStringIn;
@@ -742,7 +753,7 @@ window.EasyPopup = function() {
         }
 
         this.actionState = true;
-        setTimeout(function(){
+        var showCompletedCallback = function(){
             Popup.actionState = false;
 
             // если включено закрытие попапа при нажатии Esc или подтверждение при нажатии Enter // запускать только по таймауту, иначе глюк события - отключается раньше полного появления попапа, при этом метод close блокируется, т.к. открытие попапа ещё не завершилось =)
@@ -783,7 +794,12 @@ window.EasyPopup = function() {
                 };
                 document.addEventListener('keydown', Popup.keydownCallbackEnter);
             }
-        },this.speed);
+        };
+
+        if (showSpeed)
+            setTimeout(showCompletedCallback, showSpeed);
+        else
+            showCompletedCallback();
 
         return this;
     };
@@ -797,11 +813,13 @@ window.EasyPopup = function() {
         callback: function (callback, который выполнится перед закрытием),
         stopAfterCallback: boolean (если имеет значение true, скрипт прерывается после вызова коллбека),
         animationClose: string (имя анимации, которую применить при закрытии попапа)
+        speed: number (скорость анимации закрытия)
         */
         var closeParams = {
                 callback: false,
                 stopAfterCallback: false,
-                animationClose: false
+                animationClose: false,
+                speed: false
             },
             arguments = arguments.length ? arguments[0] : {};
 
@@ -820,10 +838,13 @@ window.EasyPopup = function() {
         if (closeParams.stopAfterCallback === true)
             return this;
 
+        // если задан параметр скорости закрытия попапа - используем его, иначе используем скорость попапа, указанную в объекте по умолчанию
+        var closeSpeed = closeParams.speed !== false ? closeParams.speed : this.speed;
+
         var activePopups = document.querySelectorAll('.easy-popup.active');
         if (activePopups.length){
             var animationNameOut = closeParams.animationClose && typeof closeParams.animationClose === 'string' ? closeParams.animationClose : this.defaultAnimationClose,
-                animationStringOut = this.speed + 'ms ' + animationNameOut + ' 1 linear';
+                animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
 
             Array.prototype.forEach.call(activePopups, function(node){
                 localFunctions.removeClass(node, 'active');
@@ -831,12 +852,17 @@ window.EasyPopup = function() {
                 node.style.animation = animationStringOut;
             });
 
-            setTimeout(function(){
-                // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
+            var displayNoneCallback = function(){
+                // всем попапам ставим display none
                 Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
                     node.style.display = 'none';
                 });
-            },this.speed);
+            };
+
+            if (closeSpeed)
+                setTimeout(displayNoneCallback, closeSpeed);
+            else
+                displayNoneCallback();
         }
         // если не отключена автопрокрутка
         if (!this.noScrollTop) {
@@ -848,8 +874,7 @@ window.EasyPopup = function() {
             scrollingElement.scrollTop = this.scrollTop;
         }
 
-        this.actionState = true;
-        setTimeout(function(){
+        var closeCompleteCallback = function(){
             //$('html, body').stop(true);
             var tint = document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"]');
             tint.style.display = 'none';
@@ -861,7 +886,14 @@ window.EasyPopup = function() {
                 delete window.a3e95e180cc04c9d85ffdd8ebecef047;
             }
             Popup.actionState = false;
-        },this.speed);
+        };
+
+        this.actionState = true;
+
+        if (closeSpeed)
+            setTimeout(closeCompleteCallback, closeSpeed);
+        else
+            closeCompleteCallback();
 
         return this;
     };
@@ -888,14 +920,11 @@ window.EasyPopup = function() {
             }
         };
 
-        if (minLoadingTime) {
+        if (minLoadingTime)
             // установить таймаут - минимальное время, в течение которого должна отображаться анимация загрузки
-            this.delayedLoading = setTimeout(function(){
-                setLoadingCallback();
-            }, minLoadingTime);
-        } else {
+            this.delayedLoading = setTimeout(setLoadingCallback, minLoadingTime);
+        else
             setLoadingCallback();
-        }
 
         return this;
     };
