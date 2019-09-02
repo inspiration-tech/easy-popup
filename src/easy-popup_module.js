@@ -538,7 +538,9 @@ export class EasyPopup {
                 closingBtnText: false,
                 confirmBtnText: false,
                 animationShow: false,
-                animationClose: false
+                animationClose: false,
+                speed: false,
+                closingSpeed: false
             },
             Popup = this,
             scrollingElement = document.scrollingElement || document.documentElement, // элемент, отвечающий за прокрутку документа
