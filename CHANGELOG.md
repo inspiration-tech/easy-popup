@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.2.0] - 2019-09-03
+### Added
+- Added the ***hideOnIos*** parameter to the popup constructor. It hides custom DOM elements (see the popup constructor parameter list).
+
+### Changed
+- The `easy-popup_overflow` class is now added to the ***body*** and ***html*** elements in IOs devices as well. These elements also get the `easy-popup_ios` class in OIs devices if the ***hideOnIos*** parameter is set and valid.
+
 ## [3.1.1] - 2019-09-02
 ### Changed
 - Fixed the popup speed error in the module version.

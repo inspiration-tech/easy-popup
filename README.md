@@ -1,4 +1,4 @@
-easy-popup v.3.1.1
+easy-popup v.3.2.0
 =============================
 
 Name in the previous versions: *simple-popup*.   
@@ -184,6 +184,10 @@ POPUP CONSTRUCTOR PARAMETER LIST:
   ***id*** `string`
     
 > Unique popup object identifier assigned to the `.easy-popup-tint` element by means of the ***data-id*** data attribute. By default a random string (from the date and a random number) is generated and assigned as the identifier. This attribute is assigned each time when creating a new popup instance (except for the cases when the target parent element (***appendTo***) already has the `.easy-popup-tint` element with the ***data-id*** attribute). In case the target parent element already has the `.easy-popup-tint` element with the ***data-id*** attribute, the value of this ***data-id*** is assigned to the popup object as its ***id*** (i.e. the popup object property is overwritten from tha data attribute).
+
+  ***hideOnIos*** `false | string | object`
+    
+> This parameter accepts a selector string or an array of selector strings, and then hides all DOM elements matching the passed selectors. The rule only applies on IOs devices for the children of the `easy-popup_overflow` element, if it exists. Otherwise, this parameter has no effect. This might be useful due to known scrolling issues in fixed elements in *Safari*, in that case it is possible to hide all elements inside ***body*** completely for the period of the popup display.
 
 --------------
 BASIC METHODS:

@@ -10,6 +10,7 @@
   vertical-align: middle;
   overflow: hidden;
   box-shadow: 0 0 15px #fff;
+  -webkit-transform: translateZ(0px);
 }
 .easy-popup button,
 .easy-popup input[type="submit"] {
@@ -47,6 +48,12 @@ html.easy-popup_overflow {
   width: 100%;
   position: fixed;
 }
+body.easy-popup_overflow.easy-popup_ios,
+html.easy-popup_overflow.easy-popup_ios {
+  height: auto;
+  position: relative;
+  pointer-events: none;
+}
 .easy-popup-tint {
   position: fixed;
   display: none;
@@ -63,6 +70,11 @@ html.easy-popup_overflow {
   text-align: center;
   vertical-align: middle;
 }
+.easy-popup_ios .easy-popup-tint {
+  position: relative;
+  height: auto !important;
+  pointer-events: auto;
+}
 .easy-popup-tint::after {
   display: inline-block;
   height: 100%;
@@ -76,6 +88,10 @@ html.easy-popup_overflow {
 body .easy-popup-tint {
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
+}
+.easy-popup-tint input,
+.easy-popup-tint button {
+  -webkit-transform: translateZ(0px);
 }
 .easy-popup__loading {
   visibility: hidden;

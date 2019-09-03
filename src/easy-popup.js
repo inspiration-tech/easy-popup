@@ -16,7 +16,8 @@ window.EasyPopup = function() {
             noScrollTop: false,
             defaultAnimationShow: 'easyPopupShow',
             defaultAnimationClose: 'easyPopupClose',
-            id: (+new Date + Math.floor(Math.random() * 10E+10)).toString(36)
+            id: (+new Date + Math.floor(Math.random() * 10E+10)).toString(36),
+            hideOnIos: false
         },
         Popup = this,
         defaultPopupParent = 'body',
@@ -210,6 +211,22 @@ window.EasyPopup = function() {
         Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
             node.style.display = 'none';
         });
+
+        if (navigator.platform.indexOf('iPad') !== -1 || navigator.platform.indexOf('iPhone') !== -1) {
+            if (['object','string'].includes(typeof Popup.hideOnIos)) {
+                localFunctions.addClass(document.body, 'easy-popup_ios');
+                localFunctions.addClass(document.querySelector('html'), 'easy-popup_ios');
+
+                var hideArr = typeof Popup.hideOnIos == 'string' ? Popup.hideOnIos.split(',') : this.hideOnIos;
+
+                document.querySelector('head').innerHTML += '<style title="'+titleHashBase+'_overflow"></style>';
+                var StyleSheet = document.querySelector('style[title="'+titleHashBase+'_overflow"]');
+
+                hideArr.forEach(function(v,i,arr){
+                    StyleSheet.innerHTML += ' .easy-popup_overflow '+v+' {display: none} ';
+                });
+            }
+        }
     });
 
 
@@ -239,6 +256,11 @@ window.EasyPopup = function() {
                 bottom: 0,
                 textAlign: 'center',
                 verticalAlign: 'middle'
+            },
+            '.easy-popup_ios .easy-popup-tint': {
+                position: 'relative',
+                height: 'auto !important',
+                pointerEvents: 'auto'
             },
             '.easy-popup-tint::after': {
                 display: 'inline-block',
@@ -277,7 +299,8 @@ window.EasyPopup = function() {
                 borderRadius: '10px',
                 verticalAlign: 'middle',
                 overflow: 'hidden',
-                boxShadow: '0 0 15px #fff'
+                boxShadow: '0 0 15px #fff',
+                WebkitTransform: 'translateZ(0px)'
             },
             '.easy-popup__heading': {
                 height: '43px',
@@ -356,11 +379,19 @@ window.EasyPopup = function() {
                 marginLeft: '10px',
                 marginRight: '10px'
             },
+            '.easy-popup-tint input, .easy-popup-tint button': {
+                WebkitTransform: 'translateZ(0px)'
+            },
             'body.easy-popup_overflow, html.easy-popup_overflow': {
                 overflow: 'hidden !important',
                 height: '100vh',
                 width: '100%',
                 position: 'fixed'
+            },
+            'body.easy-popup_overflow.easy-popup_ios, html.easy-popup_overflow.easy-popup_ios': {
+                height: 'auto',
+                position: 'relative',
+                pointerEvents: 'none'
             }
         };
 
@@ -652,16 +683,17 @@ window.EasyPopup = function() {
 
         // если не отключена автопрокрутка
         if (!this.noScrollTop) {
-            var bodyEl = document.querySelector('body');
+            var bodyEl = document.querySelector('body'),
+                htmlEl = document.querySelector('html'),
+                className = 'easy-popup_overflow';
+
+            localFunctions.addClass(htmlEl, className);
+            localFunctions.addClass(bodyEl, className);
+
             // добавляем блокатор скролла, только если это не ios
             if (navigator.platform.indexOf('iPad') === -1 && navigator.platform.indexOf('iPhone') === -1) {
-                var htmlEl = document.querySelector('html'),
-                    className = 'easy-popup_overflow';
-
-                localFunctions.addClass(bodyEl, className);
-                localFunctions.addClass(htmlEl, className);
+                bodyEl.scrollTop = this.scrollTop;
             }
-            document.querySelector('body').scrollTop = this.scrollTop;
         }
 
         if (!localFunctions.hasClass(elem,'active')) {
