@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.2.1] - 2019-09-04
+### Changed
+- Fixed the ***localFunctions*** error in the module version.
+
 ## [3.2.0] - 2019-09-03
 ### Added
 - Added the ***hideOnIos*** parameter to the popup constructor. It hides custom DOM elements (see the popup constructor parameter list).

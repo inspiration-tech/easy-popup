@@ -215,8 +215,8 @@ export class EasyPopup {
 
             if (navigator.platform.indexOf('iPad') !== -1 || navigator.platform.indexOf('iPhone') !== -1) {
                 if (['object','string'].includes(typeof this.hideOnIos)) {
-                    localFunctions.addClass(document.body, 'easy-popup_ios');
-                    localFunctions.addClass(document.querySelector('html'), 'easy-popup_ios');
+                    this.localFunctions.addClass(document.body, 'easy-popup_ios');
+                    this.localFunctions.addClass(document.querySelector('html'), 'easy-popup_ios');
 
                     let hideArr = typeof this.hideOnIos == 'string' ? this.hideOnIos.split(',') : this.hideOnIos;
 
@@ -691,8 +691,8 @@ export class EasyPopup {
                 htmlEl = document.querySelector('html'),
                 className = 'easy-popup_overflow';
 
-            localFunctions.addClass(htmlEl, className);
-            localFunctions.addClass(bodyEl, className);
+            this.localFunctions.addClass(htmlEl, className);
+            this.localFunctions.addClass(bodyEl, className);
 
             // добавляем блокатор скролла, только если это не ios
             if (navigator.platform.indexOf('iPad') === -1 && navigator.platform.indexOf('iPhone') === -1) {
