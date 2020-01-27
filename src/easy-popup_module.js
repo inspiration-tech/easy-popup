@@ -754,7 +754,8 @@ export class EasyPopup {
             else if (typeof showParams.closerCallback === 'object' && showParams.closerCallback.hasOwnProperty('callback') && typeof showParams.closerCallback.callback === 'function')
                 showParams.closerCallback.callback();
 
-            popupCloser.removeEventListener('click', Popup.closerCallbackMain);
+            if (popupCloser)
+                popupCloser.removeEventListener('click', Popup.closerCallbackMain);
         };
 
         // событие на клоузер - вешаем коллбек, который отработает только один раз (в конце он удаляет сам себя)
