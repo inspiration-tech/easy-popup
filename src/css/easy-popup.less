@@ -58,6 +58,11 @@
             height: auto;
             position: relative;
             pointer-events: none;
+
+            // ios recaptcha challenge fix
+            > div[style]:not([class]) {
+                pointer-events: auto;
+            }
         }
     }
 }

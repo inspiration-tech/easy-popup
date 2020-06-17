@@ -5,8 +5,12 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.2.3] - 2020-06-17
+### Changed
+- Fixed the ReCaptcha challenge on iOS devices (it was impossible to complete the ReCaptcha challenge if the captcha was nested inside the popup).
+
 ## [3.2.2] - 2020-01-27
-### Изменено
+### Changed
 - Fixed the undefined ***popupCloser*** variable error.
 
 ## [3.2.1] - 2019-09-04

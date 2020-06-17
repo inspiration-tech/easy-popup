@@ -54,6 +54,10 @@ html.easy-popup_overflow.easy-popup_ios {
   position: relative;
   pointer-events: none;
 }
+body.easy-popup_overflow.easy-popup_ios > div[style]:not([class]),
+html.easy-popup_overflow.easy-popup_ios > div[style]:not([class]) {
+  pointer-events: auto;
+}
 .easy-popup-tint {
   position: fixed;
   display: none;

@@ -393,6 +393,9 @@ export class EasyPopup {
                     height: 'auto',
                     position: 'relative',
                     pointerEvents: 'none'
+                },
+                'body.easy-popup_overflow.easy-popup_ios > div[style]:not([class]), html.easy-popup_overflow.easy-popup_ios > div[style]:not([class])': {
+                    pointerEvents: 'auto'
                 }
             };
 
