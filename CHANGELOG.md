@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
-## [3.2.4] - 2020-06-22
+## [3.2.5] - 2020-06-22
+### Changed
+- Added a new CSS class ***easy-popup_body-open*** as a replacement for ***easy-popup_overflow*** and ***easy-popup_ios*** to indicate whether the popup is open or not. The previous popup version is incorrect as the body content on iOS devices was removed even if the popup was closed. Version 3.2.4 should not be used on iOS devices.
+
+## [3.2.4 - incorrect version] - 2020-06-22
 ### Changed
 - Fixed the issue in parameter ***hideOnIos*** (a wrong CSS class was used: ***easy-popup_overflow*** instead of ***easy-popup_ios***).
 

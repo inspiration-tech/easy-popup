@@ -224,7 +224,7 @@ export class EasyPopup {
                     let StyleSheet = document.querySelector('style[title="'+titleHashBase+'_overflow"]');
 
                     hideArr.forEach(function(v,i,arr){
-                        StyleSheet.innerHTML += ' .easy-popup_ios '+v+' {display: none} ';
+                        StyleSheet.innerHTML += ' .easy-popup_body-open '+v+' {display: none} ';
                     });
                 }
             }
@@ -688,11 +688,15 @@ export class EasyPopup {
         this.localFunctions.addClass(tint,'active');
         this.isActive = true;
 
+        let bodyEl = document.body,
+            htmlEl = document.querySelector('html');
+
+        this.localFunctions.addClass(htmlEl, 'easy-popup_body-open');
+        this.localFunctions.addClass(bodyEl, 'easy-popup_body-open');
+
         // если не отключена автопрокрутка
         if (!this.noScrollTop) {
-            var bodyEl = document.querySelector('body'),
-                htmlEl = document.querySelector('html'),
-                className = 'easy-popup_overflow';
+            let className = 'easy-popup_overflow';
 
             this.localFunctions.addClass(htmlEl, className);
             this.localFunctions.addClass(bodyEl, className);
@@ -904,12 +908,19 @@ export class EasyPopup {
             else
                 displayNoneCallback();
         }
+
+        let htmlElem = document.querySelector('html'),
+            bodyElem = document.body;
+
+        this.localFunctions.removeClass(htmlElem, 'easy-popup_body-open');
+        this.localFunctions.removeClass(bodyElem, 'easy-popup_body-open');
+
         // если не отключена автопрокрутка
         if (!this.noScrollTop) {
-            var scrollingElement = document.scrollingElement || document.documentElement,
+            let scrollingElement = document.scrollingElement || document.documentElement,
                 classToRemove = 'easy-popup_overflow';
-            this.localFunctions.removeClass(document.querySelector('html'), classToRemove);
-            this.localFunctions.removeClass(document.querySelector('body'), classToRemove);
+            this.localFunctions.removeClass(htmlElem, classToRemove);
+            this.localFunctions.removeClass(bodyElem, classToRemove);
             document.querySelector('body').scrollTop = 0;
             scrollingElement.scrollTop = this.scrollTop;
         }
