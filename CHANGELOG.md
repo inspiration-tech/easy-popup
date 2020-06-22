@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.2.4] - 2020-06-22
+### Changed
+- Fixed the issue in parameter ***hideOnIos*** (a wrong CSS class was used: ***easy-popup_overflow*** instead of ***easy-popup_ios***).
+
 ## [3.2.3] - 2020-06-17
 ### Changed
 - Fixed the ReCaptcha challenge on iOS devices (it was impossible to complete the ReCaptcha challenge if the captcha was nested inside the popup).

@@ -223,7 +223,7 @@ window.EasyPopup = function() {
                 var StyleSheet = document.querySelector('style[title="'+titleHashBase+'_overflow"]');
 
                 hideArr.forEach(function(v,i,arr){
-                    StyleSheet.innerHTML += ' .easy-popup_overflow '+v+' {display: none} ';
+                    StyleSheet.innerHTML += ' .easy-popup_ios '+v+' {display: none} ';
                 });
             }
         }
