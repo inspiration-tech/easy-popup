@@ -950,7 +950,7 @@ window.EasyPopup = function() {
 
         // если задана картинка загрузки - ставим её на загрузку вместо стандартной крутилки (сначала проверяем - передана ли картинка напрямую в метод, потом - передана ли в конструктор)
         var loadingPic = arguments.length > 1 && arguments[1] ? arguments[1] : this.defaultLoadingPic;
-        document.querySelector('.easy-popup__loading').style.backgroundImage = 'url("'+loadingPic+'")';
+        document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup__loading').style.backgroundImage = 'url("'+loadingPic+'")';
 
         // получаем минимальное время загрузки
         var minLoadingTime = arguments.length && arguments[0] !== false && arguments[0] !== null ? arguments[0] : Math.max(this.minLoadingTime, this.speed);

@@ -957,7 +957,7 @@ export class EasyPopup {
         // если задана картинка загрузки - ставим её на загрузку вместо стандартной крутилки (сначала проверяем - передана ли картинка напрямую в метод, потом - передана ли в конструктор)
         if (!loadingPic)
             loadingPic = this.defaultLoadingPic;
-        document.querySelector('.easy-popup__loading').style.backgroundImage = 'url("'+loadingPic+'")';
+        document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup__loading').style.backgroundImage = 'url("'+loadingPic+'")';
 
         // получаем минимальное время загрузки
         if (minLoadingTime === false || minLoadingTime === null)
