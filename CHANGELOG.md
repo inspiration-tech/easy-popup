@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.2.7] - 2020-11-02
+### Changed
+- Fixed the `backgroundClickCallback` behaviour. In the previous versions it looked for `.easy-popup` with `:hover`. Now it checks that the `.easy-popup-tint` element is the current one, and only then executes the passed callback.
+
 ## [3.2.6] - 2020-08-26
 ### Changed
 - Fixed a bug in `setLoading` method. In the previous versions the loading indicator (image) was applied to all ***EasyPopup*** instances instead of the current one.

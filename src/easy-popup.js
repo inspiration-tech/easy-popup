@@ -728,19 +728,19 @@ window.EasyPopup = function() {
             delete this.keydownCallbackEnter;
         }
         if (closingBtn && this.hasOwnProperty('closingBtnCallback')) {
-            closingBtn.removeEventListener('click', this.closingBtnCallback);
+            closingBtn.removeEventListener('click', this.closingBtnCallback, {once: true});
             delete this.closingBtnCallback;
         }
         if (confirmBtn && this.hasOwnProperty('confirmBtnCallback')) {
-            confirmBtn.removeEventListener('click', this.confirmBtnCallback);
+            confirmBtn.removeEventListener('click', this.confirmBtnCallback, {once: true});
             delete this.confirmBtnCallback;
         }
         if (tint && this.hasOwnProperty('tintCallback')) {
-            tint.removeEventListener('click', this.tintCallback);
+            tint.removeEventListener('click', this.tintCallback, {once: true});
             delete this.tintCallback;
         }
         if (popupCloser && this.hasOwnProperty('closerCallbackMain')) {
-            popupCloser.removeEventListener('click', this.closerCallbackMain);
+            popupCloser.removeEventListener('click', this.closerCallbackMain, {once: true});
             delete this.closerCallbackMain;
         }
 
@@ -762,7 +762,8 @@ window.EasyPopup = function() {
 
         // событие на клоузер - вешаем коллбек, который отработает только один раз (в конце он удаляет сам себя)
         if (popupCloser)
-            popupCloser.addEventListener('click', this.closerCallbackMain);
+            popupCloser.addEventListener('click', this.closerCallbackMain, {once: true});
+
         // если события на кнопки не отключены
         if (showParams.btnEvents) {
             if (closingBtn) {
@@ -770,25 +771,32 @@ window.EasyPopup = function() {
                     showParams.closingBtnCallback();
                     this.removeEventListener('click', closing);
                 } : this.closerCallbackMain;
-                closingBtn.addEventListener('click', this.closingBtnCallback);
+                closingBtn.addEventListener('click', this.closingBtnCallback, {once: true});
             }
             if (confirmBtn) {
                 this.confirmBtnCallback = showParams.confirmBtnCallback ? function confirm(){
                     showParams.confirmBtnCallback();
                     this.removeEventListener('click', confirm);
                 } : this.closerCallbackMain;
-                confirmBtn.addEventListener('click', this.confirmBtnCallback);
+                confirmBtn.addEventListener('click', this.confirmBtnCallback, {once: true});
             }
         }
         // если включено закрытие попапа по клику на фон
         if (Popup.allowBackgroundCallback) {
-            this.tintCallback = function(){
-                if (!Popup.isLoading && !document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"] .easy-popup:hover')) {
-                    (showParams.backgroundClickCallback ? showParams.backgroundClickCallback : Popup.closerCallbackMain)();
-                    this.removeEventListener('click', Popup.tintCallback);
-                }
+            this.tintCallback = function(e){
+                if (!localFunctions.hasClass(e.target, 'easy-popup-tint'))
+                    return;
+
+                if (!e.target.hasAttribute('data-id') || e.target.getAttribute('data-id') != Popup.id)
+                    return;
+
+                if (Popup.isLoading)
+                    return;
+
+                (showParams.backgroundClickCallback ? showParams.backgroundClickCallback : Popup.closerCallbackMain)();
+                this.removeEventListener('click', Popup.tintCallback, {once: true});
             };
-            tint.addEventListener('click', this.tintCallback);
+            tint.addEventListener('click', this.tintCallback, {once: true});
         }
 
         this.actionState = true;
