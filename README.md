@@ -1,4 +1,4 @@
-easy-popup v.3.2.7
+easy-popup v.3.3.0
 =============================
 
 Name in the previous versions: *simple-popup*.   

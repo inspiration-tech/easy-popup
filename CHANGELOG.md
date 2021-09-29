@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.3.0] - 2021-09-29
+### Changed
+- Fixed popup blinking when changing for another popup.
+
 ## [3.2.7] - 2020-11-02
 ### Changed
 - Fixed the `backgroundClickCallback` behaviour. In the previous versions it looked for `.easy-popup` with `:hover`. Now it checks that the `.easy-popup-tint` element is the current one, and only then executes the passed callback.

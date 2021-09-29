@@ -594,12 +594,6 @@ window.EasyPopup = function() {
             var animationNameOut = showParams.animationClose && typeof showParams.animationClose === 'string' ? showParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
 
-            Array.prototype.forEach.call(activePopups, function(node){
-                localFunctions.removeClass(node, 'active');
-                node.style.WebkitAnimation = animationStringOut;
-                node.style.animation = animationStringOut;
-            });
-
             var displayNoneCallback = function(){
                 // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
                 Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
@@ -608,10 +602,17 @@ window.EasyPopup = function() {
                 Popup.show(showParams);
             };
 
-            if (closeSpeed)
-                setTimeout(displayNoneCallback, closeSpeed);
-            else
-                displayNoneCallback();
+            Array.prototype.forEach.call(activePopups, function(node){
+                localFunctions.removeClass(node, 'active');
+                node.style.WebkitAnimation = animationStringOut;
+                node.style.animation = animationStringOut;
+
+                if (closeSpeed) {
+                    node.addEventListener('animationend', displayNoneCallback, {once: true});
+                } else {
+                    displayNoneCallback();
+                }
+            });
 
             return this;
         }

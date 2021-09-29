@@ -3,7 +3,7 @@
 export class EasyPopup {
 
     constructor(params = {}) {
-        var defaults = {
+        let defaults = {
                 speed: 150,
                 styles: false,
                 replaceStyles: false,
@@ -27,8 +27,8 @@ export class EasyPopup {
             specialHashInit = false,
             styleHandler = {
                 objToCSS: function(obj) {
-                    var html = '';
-                    for (var prop in obj) {
+                    let html = '';
+                    for (let prop in obj) {
                         if (!obj.hasOwnProperty(prop))
                             continue;
 
@@ -37,7 +37,7 @@ export class EasyPopup {
                     return html;
                 },
                 processObj: function(scriptStyleObj, paramStyleObj){
-                    for (var customSelector in paramStyleObj) {
+                    for (let customSelector in paramStyleObj) {
                         if (!paramStyleObj.hasOwnProperty(customSelector))
                             continue;
 
@@ -53,14 +53,14 @@ export class EasyPopup {
                             continue;
                         }
 
-                        for (var prop in paramStyleObj[customSelector]) {
+                        for (let prop in paramStyleObj[customSelector]) {
                             if (!paramStyleObj[customSelector].hasOwnProperty(prop))
                                 continue;
 
                             scriptStyleObj[customSelector][prop] = paramStyleObj[customSelector][prop];
                         }
 
-                        for (var customProperty in scriptStyleObj[customSelector]) {
+                        for (let customProperty in scriptStyleObj[customSelector]) {
                             if (!scriptStyleObj[customSelector].hasOwnProperty(customProperty))
                                 continue;
 
@@ -106,7 +106,7 @@ export class EasyPopup {
             }
         };
 
-        for (var prop in defaults) {
+        for (let prop in defaults) {
             if (!defaults.hasOwnProperty(prop))
                 continue;
 
@@ -131,7 +131,7 @@ export class EasyPopup {
             StyleSheet.innerHTML = '';
 
 
-        var templates = {
+        let templates = {
             message: '<div class="easy-popup" data-name="message">' +
                         '<div class="easy-popup__closer">' +
                             '<div></div>' +
@@ -162,7 +162,7 @@ export class EasyPopup {
         };
 
         if (typeof params.templates === 'object') {
-            for (var customTemplate in params.templates) {
+            for (let customTemplate in params.templates) {
                 if (!params.templates.hasOwnProperty(customTemplate))
                     continue;
 
@@ -172,7 +172,7 @@ export class EasyPopup {
 
         // $(function(){});
         this.localFunctions.ready(()=>{
-            var popupSelector = this.appendTo ? this.appendTo : defaultPopupParent,
+            let popupSelector = this.appendTo ? this.appendTo : defaultPopupParent,
                 popupParent = document.querySelector(popupSelector),
                 popupTint = document.querySelector(popupSelector + ' > .easy-popup-tint');
 
@@ -181,14 +181,14 @@ export class EasyPopup {
             else
                 popupParent.innerHTML += '<div class="easy-popup-tint" data-id="'+this.id+'"></div>';
 
-            var html = '';
-            for (var name in templates) {
+            let html = '';
+            for (let name in templates) {
                 if (!templates.hasOwnProperty(name))
                     continue;
 
                 if (templates[name] === false) {
                     delete templates[name];
-                    var popupItem = document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup[data-name="'+name+'"]');
+                    let popupItem = document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup[data-name="'+name+'"]');
                     if (popupItem.length) {
                         //popupItem.remove();
                         Array.prototype.forEach.call(popupItem, function(node){
@@ -241,7 +241,7 @@ export class EasyPopup {
             * Объект scriptStyles содержит дефолтные стили для попапа, объект scriptMediaStyles - дефолтные медиазапросы. Объект this.styles дополняет объект scriptStyles (а объект this.mediaStyles дополняет объект scriptMediaStyles): если указанного селектора нет - он добавляется, если есть - то его объект CSS-стилей дополняется стилями из объекта this.styles (по соответствующему селектору), при этом если в значении одного из свойств указано false - данное свойство удаляется. Аналогичным образом, если в объекте this.styles передан селектор со значением false, то этот селектор удаляется из объекта scriptStyles.
             * */
 
-            var scriptStyles = {
+            let scriptStyles = {
                 '.easy-popup-tint': {
                     position: 'fixed',
                     display: 'none',
@@ -399,7 +399,7 @@ export class EasyPopup {
                 }
             };
 
-            var scriptMediaStyles = {
+            let scriptMediaStyles = {
                 '@keyframes easyPopupShow': {
                     'from': {
                         opacity: 0,
@@ -450,7 +450,7 @@ export class EasyPopup {
 
             if (this.replaceStyles) {
                 //scriptStyles = $.extend(scriptStyles, this.styles);
-                for (var prop1 in this.styles) {
+                for (let prop1 in this.styles) {
                     if (!this.styles.hasOwnProperty(prop1))
                         continue;
 
@@ -464,7 +464,7 @@ export class EasyPopup {
                 if (typeof this.mediaStyles !== 'object')
                     this.mediaStyles = {};
 
-                for (var mediaQuery in this.mediaStyles) {
+                for (let mediaQuery in this.mediaStyles) {
                     if (!this.mediaStyles.hasOwnProperty(mediaQuery))
                         continue;
 
@@ -482,7 +482,7 @@ export class EasyPopup {
 
                     if (this.replaceStyles) {
                         //scriptMediaStyles[mediaQuery] = $.extend(scriptMediaStyles[mediaQuery], this.mediaStyles[mediaQuery]);
-                        for (var prop2 in this.mediaStyles[mediaQuery]) {
+                        for (let prop2 in this.mediaStyles[mediaQuery]) {
                             if (!this.mediaStyles[mediaQuery].hasOwnProperty(prop2))
                                 continue;
 
@@ -509,28 +509,28 @@ export class EasyPopup {
             }
 
 
-            for (var selector in scriptStyles) {
+            for (let selector in scriptStyles) {
                 if (!scriptStyles.hasOwnProperty(selector))
                     continue;
 
                 selector = selector.trim().replace(/\s+/g, ' ');
-                var selectorContent = styleHandler.objToCSS(scriptStyles[selector]);
+                let selectorContent = styleHandler.objToCSS(scriptStyles[selector]);
                 StyleSheet.innerHTML += selector + "{" + selectorContent + "}";
             }
 
             if (this.mediaStyles !== false) {
-                for (var mediaString in scriptMediaStyles) {
+                for (let mediaString in scriptMediaStyles) {
                     if (!scriptMediaStyles.hasOwnProperty(mediaString))
                         continue;
 
-                    var mediaHTML = '';
-                    for (var mediaSelector in scriptMediaStyles[mediaString]) {
+                    let mediaHTML = '';
+                    for (let mediaSelector in scriptMediaStyles[mediaString]) {
                         if (!scriptMediaStyles[mediaString].hasOwnProperty(mediaSelector))
                             continue;
 
                         mediaSelector = mediaSelector.trim().replace(/\s+/g, ' ');
 
-                        var mediaSelectorContent = styleHandler.objToCSS(scriptMediaStyles[mediaString][mediaSelector]);
+                        let mediaSelectorContent = styleHandler.objToCSS(scriptMediaStyles[mediaString][mediaSelector]);
 
                         mediaHTML += mediaSelector+"{"+mediaSelectorContent+"}";
                     }
@@ -550,14 +550,14 @@ export class EasyPopup {
             return this;
 
         // если были активные элементы - запоминаем и делаем неактивными
-        var elemsWithFocus = document.querySelector(':focus');
+        let elemsWithFocus = document.querySelector(':focus');
         if (elemsWithFocus) {
             // сохраняем элемент, на которым был фокус глобально
             window.a3e95e180cc04c9d85ffdd8ebecef047 = elemsWithFocus;
             elemsWithFocus.blur();
         }
 
-        var showParams = {
+        let showParams = {
                 title: 'Ошибка', // заголовок попапа
                 text: 'Произошла ошибка всплывающего окна. Пожалуйста, обратитесь в обратную связь.', // текст попапа
                 btnEvents: true, // включить/отключить события при клике на кнопки .closing_button и .confirm_button
@@ -580,7 +580,7 @@ export class EasyPopup {
             scrollingElement = document.scrollingElement || document.documentElement, // элемент, отвечающий за прокрутку документа
             elem;
 
-        for (var prop in showParams) {
+        for (let prop in showParams) {
             if (!showParams.hasOwnProperty(prop))
                 continue;
 
@@ -593,16 +593,10 @@ export class EasyPopup {
             showSpeed = showParams.speed !== false ? showParams.speed : this.speed;
 
         // смотрим, есть ли уже открытые (активные) попапы
-        var activePopups = document.querySelectorAll('.easy-popup.active');
+        let activePopups = document.querySelectorAll('.easy-popup.active');
         if (activePopups.length){
-            var animationNameOut = showParams.animationClose && typeof showParams.animationClose === 'string' ? showParams.animationClose : this.defaultAnimationClose,
+            let animationNameOut = showParams.animationClose && typeof showParams.animationClose === 'string' ? showParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
-
-            Array.prototype.forEach.call(activePopups, (node)=>{
-                this.localFunctions.removeClass(node, 'active');
-                node.style.WebkitAnimation = animationStringOut;
-                node.style.animation = animationStringOut;
-            });
 
             let displayNoneCallback = ()=>{
                 // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
@@ -612,10 +606,17 @@ export class EasyPopup {
                 this.show(showParams);
             };
 
-            if (closeSpeed)
-                setTimeout(displayNoneCallback, closeSpeed);
-            else
-                displayNoneCallback();
+            Array.prototype.forEach.call(activePopups, (node)=>{
+                this.localFunctions.removeClass(node, 'active');
+                node.style.WebkitAnimation = animationStringOut;
+                node.style.animation = animationStringOut;
+
+                if (closeSpeed) {
+                    node.addEventListener('animationend', displayNoneCallback, {once: true});
+                } else {
+                    displayNoneCallback();
+                }
+            });
 
             return this;
         }
@@ -623,7 +624,7 @@ export class EasyPopup {
         // если имя попапа === false - нужно только показать тинт, а дальнейшая обработка не требуется
         if (showParams.name === false) {
             // отображение попапа (а точнее, тинта)
-            var tintOnly = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
+            let tintOnly = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
             tintOnly.style.display = 'block';
             this.localFunctions.addClass(tintOnly, 'active');
             this.isActive = true;
@@ -639,24 +640,24 @@ export class EasyPopup {
 
         // вставка контента в попап
         if (showParams.title !== false) {
-            var popupHeading = elem.querySelector('.easy-popup__heading');
+            let popupHeading = elem.querySelector('.easy-popup__heading');
             if (popupHeading)
                 popupHeading.innerHTML = showParams.title;
         }
         if (showParams.html) {
-            var popupBody = elem.querySelector('.easy-popup__body');
+            let popupBody = elem.querySelector('.easy-popup__body');
             if (popupBody)
                 popupBody.innerHTML = showParams.html;
         } else {
             if (showParams.text !== false) {
-                var popupText = elem.querySelector('.easy-popup__text');
+                let popupText = elem.querySelector('.easy-popup__text');
                 if (popupText)
                     popupText.innerHTML = showParams.text;
             }
         }
 
         // текст кнопок
-        var popupClosingButton = elem.querySelector('.closing_button'),
+        let popupClosingButton = elem.querySelector('.closing_button'),
             popupConfirmButton = elem.querySelector('.confirm_button');
 
         if (popupClosingButton) {
@@ -683,7 +684,7 @@ export class EasyPopup {
         if (!this.isActive)
             this.scrollTop = scrollingElement.scrollTop;
         // отображение попапа
-        var tint = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
+        let tint = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
         tint.style.display = 'block';
         this.localFunctions.addClass(tint,'active');
         this.isActive = true;
@@ -711,14 +712,14 @@ export class EasyPopup {
             elem.style.display = 'inline-block';
             this.localFunctions.addClass(elem,'active');
 
-            var animationNameIn = showParams.animationShow && typeof showParams.animationShow === 'string' ? showParams.animationShow : this.defaultAnimationShow,
+            let animationNameIn = showParams.animationShow && typeof showParams.animationShow === 'string' ? showParams.animationShow : this.defaultAnimationShow,
                 animationStringIn = showSpeed + 'ms ' + animationNameIn + ' 1 linear';
 
             elem.style.WebkitAnimation = animationStringIn;
             elem.style.animation = animationStringIn;
         }
 
-        var closingBtn = elem.querySelector('.closing_button'),
+        let closingBtn = elem.querySelector('.closing_button'),
             confirmBtn = elem.querySelector('.confirm_button'),
             popupCloser = elem.querySelector('.easy-popup__closer');
 
@@ -798,7 +799,7 @@ export class EasyPopup {
                     return;
 
                 (showParams.backgroundClickCallback ? showParams.backgroundClickCallback : Popup.closerCallbackMain)();
-                this.removeEventListener('click', Popup.tintCallback, {once: true});
+                tint.removeEventListener('click', Popup.tintCallback, {once: true});
             };
             tint.addEventListener('click', this.tintCallback, {once: true});
         }
@@ -817,7 +818,7 @@ export class EasyPopup {
                     }
 
                     //$._data(document, "events"); // проверка эвентов на jQuery
-                    var keyCode = e.hasOwnProperty('keyCode') ? e.keyCode : e.which;
+                    let keyCode = e.hasOwnProperty('keyCode') ? e.keyCode : e.which;
 
                     if (Popup.allowCallbackOnEsc && keyCode === 27) {
                         (showParams.callbackOnEsc ? showParams.callbackOnEsc : Popup.closerCallbackMain)();
@@ -836,7 +837,7 @@ export class EasyPopup {
                     }
 
                     //$._data(document, "events"); // проверка эвентов на jQuery
-                    var keyCode = e.hasOwnProperty('keyCode') ? e.keyCode : e.which;
+                    let keyCode = e.hasOwnProperty('keyCode') ? e.keyCode : e.which;
 
                     if (Popup.allowCallbackOnEnter && keyCode === 13) {
                         (showParams.callbackOnEnter ? showParams.callbackOnEnter : (showParams.confirmBtnCallback ? showParams.confirmBtnCallback : Popup.closerCallbackMain))();
@@ -867,14 +868,14 @@ export class EasyPopup {
         animationClose: string (имя анимации, которую применить при закрытии попапа)
         closeSpeed: number (скорость анимации закрытия)
         */
-        var closeParams = {
+        let closeParams = {
                 callback: false,
                 stopAfterCallback: false,
                 animationClose: false,
                 speed: false
             };
 
-        for (var prop in closeParams) {
+        for (let prop in closeParams) {
             if (!closeParams.hasOwnProperty(prop))
                 continue;
 
@@ -890,11 +891,11 @@ export class EasyPopup {
             return this;
 
         // если задан параметр скорости закрытия попапа - используем его, иначе используем скорость попапа, указанную в объекте по умолчанию
-        var closeSpeed = closeParams.speed !== false ? closeParams.speed : this.speed;
+        let closeSpeed = closeParams.speed !== false ? closeParams.speed : this.speed;
 
-        var activePopups = document.querySelectorAll('.easy-popup.active');
+        let activePopups = document.querySelectorAll('.easy-popup.active');
         if (activePopups.length){
-            var animationNameOut = closeParams.animationClose && typeof closeParams.animationClose === 'string' ? closeParams.animationClose : this.defaultAnimationClose,
+            let animationNameOut = closeParams.animationClose && typeof closeParams.animationClose === 'string' ? closeParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
 
             Array.prototype.forEach.call(activePopups, (node)=>{
@@ -903,7 +904,7 @@ export class EasyPopup {
                 node.style.animation = animationStringOut;
             });
 
-            var displayNoneCallback = ()=>{
+            let displayNoneCallback = ()=>{
                 // всем попапам ставим display none
                 Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
                     node.style.display = 'none';
@@ -934,7 +935,7 @@ export class EasyPopup {
 
         let closeCompleteCallback = ()=>{
             //$('html, body').stop(true);
-            var tint = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
+            let tint = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
             tint.style.display = 'none';
             this.localFunctions.removeClass(tint, 'active');
             this.isActive = false;
