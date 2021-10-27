@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.3.3] - 2021-10-27
+### Changed
+- Fixed the bugs of wrong css class application in the child popups (when there are multiple instances).
+
 ## [3.3.2] - 2021-10-27
 ### Changed
 - Fixed tint (`.easy-popup-tint`) height when placed directly in `body`.
