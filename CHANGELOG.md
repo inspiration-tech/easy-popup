@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.3.1] - 2021-10-27
+### Changed
+- Fixed popup parent element selector handling when multiple instances are initialized.
+
 ## [3.3.0] - 2021-09-29
 ### Changed
 - Fixed popup blinking when changing for another popup.

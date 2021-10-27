@@ -209,7 +209,7 @@ export class EasyPopup {
             document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]').innerHTML += html;
 
             //$('.easy-popup').hide(); // по умолчанию у попапов display inline-block, поэтому нужно скрыть
-            Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
+            Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup'), function(node){
                 node.style.display = 'none';
             });
 
@@ -593,14 +593,14 @@ export class EasyPopup {
             showSpeed = showParams.speed !== false ? showParams.speed : this.speed;
 
         // смотрим, есть ли уже открытые (активные) попапы
-        let activePopups = document.querySelectorAll('.easy-popup.active');
+        let activePopups = document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup.active');
         if (activePopups.length){
             let animationNameOut = showParams.animationClose && typeof showParams.animationClose === 'string' ? showParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
 
             let displayNoneCallback = ()=>{
                 // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
-                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
+                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup'), function(node){
                     node.style.display = 'none';
                 });
                 this.show(showParams);
@@ -893,7 +893,7 @@ export class EasyPopup {
         // если задан параметр скорости закрытия попапа - используем его, иначе используем скорость попапа, указанную в объекте по умолчанию
         let closeSpeed = closeParams.speed !== false ? closeParams.speed : this.speed;
 
-        let activePopups = document.querySelectorAll('.easy-popup.active');
+        let activePopups = document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup.active');
         if (activePopups.length){
             let animationNameOut = closeParams.animationClose && typeof closeParams.animationClose === 'string' ? closeParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
@@ -906,7 +906,7 @@ export class EasyPopup {
 
             let displayNoneCallback = ()=>{
                 // всем попапам ставим display none
-                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup'), function(node){
+                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] .easy-popup'), function(node){
                     node.style.display = 'none';
                 });
             };

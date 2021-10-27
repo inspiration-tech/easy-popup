@@ -1,4 +1,4 @@
-easy-popup v.3.3.0
+easy-popup v.3.3.1
 =============================
 
 Название в предыдущих версиях: *simple-popup*.   
@@ -64,7 +64,7 @@ import {EasyPopup} from 'easy-popup';
 
 ```html
 "require": {
-    "npm-asset/easy-popup": "^3.0.3" 
+    "npm-asset/easy-popup": "^3.3.1" 
 },
 ```
 

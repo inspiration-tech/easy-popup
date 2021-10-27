@@ -1,4 +1,4 @@
-easy-popup v.3.3.0
+easy-popup v.3.3.1
 =============================
 
 Name in the previous versions: *simple-popup*.   
@@ -64,7 +64,7 @@ Then you only need to ***require*** the package as follows (indicate the require
 
 ```html
 "require": {
-    "npm-asset/easy-popup": "^3.0.3" 
+    "npm-asset/easy-popup": "^3.3.1" 
 },
 ```
 
