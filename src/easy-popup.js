@@ -245,7 +245,7 @@ window.EasyPopup = function() {
                 position: 'fixed',
                 display: 'none',
                 width: '100%',
-                height: '100vh !important',
+                height: '100vh',
                 overflowY: 'auto',
                 overflowX: 'hidden',
                 background: 'RGBA(0,0,0,0.7)',
@@ -256,6 +256,9 @@ window.EasyPopup = function() {
                 bottom: 0,
                 textAlign: 'center',
                 verticalAlign: 'middle'
+            },
+            'body > .easy-popup-tint': {
+                height: '100vh !important'
             },
             '.easy-popup_ios .easy-popup-tint': {
                 position: 'relative',
@@ -785,17 +788,24 @@ window.EasyPopup = function() {
         // если включено закрытие попапа по клику на фон
         if (Popup.allowBackgroundCallback) {
             this.tintCallback = function(e){
-                if (!localFunctions.hasClass(e.target, 'easy-popup-tint'))
-                    return;
+                this.removeEventListener('click', Popup.tintCallback, {once: true});
 
-                if (!e.target.hasAttribute('data-id') || e.target.getAttribute('data-id') != Popup.id)
+                if (!localFunctions.hasClass(e.target, 'easy-popup-tint')) {
+                    tint.addEventListener('click', Popup.tintCallback, {once: true});
                     return;
+                }
 
-                if (Popup.isLoading)
+                if (!e.target.hasAttribute('data-id') || e.target.getAttribute('data-id') != Popup.id) {
+                    tint.addEventListener('click', Popup.tintCallback, {once: true});
                     return;
+                }
+
+                if (Popup.isLoading || Popup.actionState) {
+                    tint.addEventListener('click', Popup.tintCallback, {once: true});
+                    return;
+                }
 
                 (showParams.backgroundClickCallback ? showParams.backgroundClickCallback : Popup.closerCallbackMain)();
-                this.removeEventListener('click', Popup.tintCallback, {once: true});
             };
             tint.addEventListener('click', this.tintCallback, {once: true});
         }

@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 Changelog in other languages:  
 [Russian](CHANGELOG.ru.md)
 
+## [3.3.2] - 2021-10-27
+### Changed
+- Fixed tint (`.easy-popup-tint`) height when placed directly in `body`.
+- Fixed the bug of tint (`.easy-popup-tint`) event being lost.
+
 ## [3.3.1] - 2021-10-27
 ### Changed
 - Fixed popup parent element selector handling when multiple instances are initialized.
