@@ -21,6 +21,7 @@ export class EasyPopup {
                 id: (+new Date + Math.floor(Math.random() * 10E+10)).toString(36),
                 hideOnIos: false
             },
+            Popup = this,
             defaultPopupParent = 'body',
             titleHashBase = '958c1d72380718e5f4b576299fb5ea0c',
             StyleSheet,
@@ -177,9 +178,9 @@ export class EasyPopup {
                 popupTint = document.querySelector(popupSelector + ' > .easy-popup-tint');
 
             if (popupTint)
-                popupTint.dataset.id = this.id;
+                popupTint.dataset.id = Popup.id;
             else
-                popupParent.innerHTML += '<div class="easy-popup-tint" data-id="'+this.id+'"></div>';
+                popupParent.innerHTML += '<div class="easy-popup-tint" data-id="'+Popup.id+'"></div>';
 
             let html = '';
             for (let name in templates) {
@@ -188,7 +189,7 @@ export class EasyPopup {
 
                 if (templates[name] === false) {
                     delete templates[name];
-                    let popupItem = document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup[data-name="'+name+'"]');
+                    let popupItem = document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup[data-name="'+name+'"]');
                     if (popupItem.length) {
                         //popupItem.remove();
                         Array.prototype.forEach.call(popupItem, function(node){
@@ -198,18 +199,18 @@ export class EasyPopup {
                     continue;
                 }
 
-                if (!document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup[data-name="'+name+'"]').length)
+                if (!document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup[data-name="'+name+'"]').length)
                     html += templates[name];
             }
 
-            if (!document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup__loading'))
+            if (!document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup__loading'))
                 html += '<div class="easy-popup__loading"></div>';
 
             //$('.easy-popup-tint').append(html);
-            document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]').innerHTML += html;
+            document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"]').innerHTML += html;
 
             //$('.easy-popup').hide(); // по умолчанию у попапов display inline-block, поэтому нужно скрыть
-            Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup'), function(node){
+            Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup'), function(node){
                 node.style.display = 'none';
             });
 
@@ -596,14 +597,14 @@ export class EasyPopup {
             showSpeed = showParams.speed !== false ? showParams.speed : this.speed;
 
         // смотрим, есть ли уже открытые (активные) попапы
-        let activePopups = document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup.active');
+        let activePopups = document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup.active');
         if (activePopups.length){
             let animationNameOut = showParams.animationClose && typeof showParams.animationClose === 'string' ? showParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
 
             let displayNoneCallback = ()=>{
                 // всем попапам ставим display none и запускаем метод show снова, с теми же параметрами
-                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup'), function(node){
+                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup'), function(node){
                     node.style.display = 'none';
                 });
                 this.show(showParams);
@@ -627,7 +628,7 @@ export class EasyPopup {
         // если имя попапа === false - нужно только показать тинт, а дальнейшая обработка не требуется
         if (showParams.name === false) {
             // отображение попапа (а точнее, тинта)
-            let tintOnly = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
+            let tintOnly = document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"]');
             tintOnly.style.display = 'block';
             this.localFunctions.addClass(tintOnly, 'active');
             this.isActive = true;
@@ -635,11 +636,11 @@ export class EasyPopup {
             return this;
         }
 
-        elem = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup[data-name="'+showParams.name+'"]');
+        elem = document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup[data-name="'+showParams.name+'"]');
         if (!elem)
-            elem = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup[data-name="'+(showParams.name = 'message')+'"]');
+            elem = document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup[data-name="'+(showParams.name = 'message')+'"]');
         if (!elem)
-            elem = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup:first-child');
+            elem = document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup:first-child');
 
         // вставка контента в попап
         if (showParams.title !== false) {
@@ -687,7 +688,7 @@ export class EasyPopup {
         if (!this.isActive)
             this.scrollTop = scrollingElement.scrollTop;
         // отображение попапа
-        let tint = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
+        let tint = document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"]');
         tint.style.display = 'block';
         this.localFunctions.addClass(tint,'active');
         this.isActive = true;
@@ -883,7 +884,8 @@ export class EasyPopup {
                 stopAfterCallback: false,
                 animationClose: false,
                 speed: false
-            };
+            },
+            Popup = this;
 
         for (let prop in closeParams) {
             if (!closeParams.hasOwnProperty(prop))
@@ -903,7 +905,7 @@ export class EasyPopup {
         // если задан параметр скорости закрытия попапа - используем его, иначе используем скорость попапа, указанную в объекте по умолчанию
         let closeSpeed = closeParams.speed !== false ? closeParams.speed : this.speed;
 
-        let activePopups = document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup.active');
+        let activePopups = document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup.active');
         if (activePopups.length){
             let animationNameOut = closeParams.animationClose && typeof closeParams.animationClose === 'string' ? closeParams.animationClose : this.defaultAnimationClose,
                 animationStringOut = closeSpeed + 'ms ' + animationNameOut + ' 1 linear';
@@ -916,7 +918,7 @@ export class EasyPopup {
 
             let displayNoneCallback = ()=>{
                 // всем попапам ставим display none
-                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+this.id+'"] > .easy-popup'), function(node){
+                Array.prototype.forEach.call(document.querySelectorAll('.easy-popup-tint[data-id="'+Popup.id+'"] > .easy-popup'), function(node){
                     node.style.display = 'none';
                 });
             };
@@ -945,7 +947,7 @@ export class EasyPopup {
 
         let closeCompleteCallback = ()=>{
             //$('html, body').stop(true);
-            let tint = document.querySelector('.easy-popup-tint[data-id="'+this.id+'"]');
+            let tint = document.querySelector('.easy-popup-tint[data-id="'+Popup.id+'"]');
             tint.style.display = 'none';
             this.localFunctions.removeClass(tint, 'active');
             this.isActive = false;
